@@ -1,0 +1,297 @@
+#include <AccelStepper.h>
+
+
+
+AccelStepper yStepper(AccelStepper::DRIVER, 2, 5);
+AccelStepper xStepper(AccelStepper::DRIVER, 3, 6);
+
+
+
+// defines pins numbers
+
+//Front left wheel
+
+const int stepX = 2;
+
+const int dirX  = 5;
+
+
+
+//Front right wheel
+
+const int stepY = 3;
+
+const int dirY  = 6;
+
+
+
+//Back left wheel
+
+const int stepZ = 4;
+
+const int dirZ  = 7;
+
+
+
+//Back right wheel
+
+const int stepA = 12;
+
+const int dirA  = 13;
+
+
+
+const int enPin = 8;
+
+
+yMovementComplete = false;
+xMovementComplete = false;
+
+
+
+
+void setup() {
+
+  yStepper.setMaxSpeed(800);
+  yStepper.setAcceleration(400);
+  xStepper.setMaxSpeed(800);
+  xStepper.setAcceleration(400);
+ 
+
+  Serial.begin(9600);
+  delayMicroseconds(1000);
+
+  Serial.println("Comm's Ready");
+
+
+
+  // Sets the pins as Outputs
+
+  pinMode(stepX, OUTPUT);
+
+  pinMode(dirX, OUTPUT);
+
+
+
+  pinMode(stepY, OUTPUT);
+
+  pinMode(dirY, OUTPUT);
+
+
+
+  pinMode(stepZ, OUTPUT);
+
+  pinMode(dirZ, OUTPUT);
+
+
+
+  pinMode(enPin, OUTPUT);
+
+
+
+  digitalWrite(enPin, LOW);
+
+  digitalWrite(dirX, HIGH);
+
+  digitalWrite(dirY, HIGH);
+
+  digitalWrite(dirZ, HIGH);
+
+  digitalWrite(dirA, HIGH);
+
+}
+
+
+
+void loop() {
+
+
+  //moveRoutine();
+
+  //picSignal();
+
+  getPos1();
+
+  getPos2();
+
+  //picRefineSignal();
+
+  //fixDivot();
+
+ 
+
+}
+
+
+
+//void moveRoutine() {
+
+//INSERT DISTANCE FOR NEW IMAGE BELOW FOR moveRoutineDist integer
+
+    //int moveRoutineDist = 2000;
+
+    //delay(2000);
+
+    //yStepper.move(moveRoutineDist);
+    //xStepper.move(moveRoutineDist);
+
+    //yStepper.runToPosition();
+    //xStepper.runToPosition();
+
+    //delayMicroseconds(2000);
+
+//}
+
+
+
+//void picSignal() {
+
+
+
+
+
+//}
+
+
+
+void getPos1() {
+
+ 
+
+  String YpulseEncode;
+
+  if (Serial.available() > 0) {          
+
+    YpulseEncode = Serial.readStringUntil('\n');
+
+    int yMove1 = YpulseEncode.toInt();
+
+   
+
+  if (yMove1 < 0) {
+
+    int yMoveNew = yMove1 * (-1);
+
+    Serial.println(yMove1 * (-1));
+
+    delay(2000);
+
+    yStepper.move(-yMoveNew);
+
+    yStepper.runToPosition();
+
+    delayMicroseconds(1000);
+
+  }
+
+  else {
+
+    int yMoveNew = yMove1;
+
+    Serial.println(yMove1);
+
+    delay(2000);
+
+    yStepper.move(yMoveNew);
+
+    yStepper.runToPosition();
+
+    delayMicroseconds(2000);
+   
+    Serial.println("Movement Complete");
+
+    yMoveComplete = true;
+
+  }
+
+
+
+  }
+}
+
+
+
+
+void getPos2() {
+
+
+  String XpulseEncode;
+
+  if (Serial.available() > 0) {          
+
+    XpulseEncode = Serial.readStringUntil('\n');
+
+    int xMove1 = XpulseEncode.toInt();
+
+   
+
+  if (xMove1 < 0) {
+
+    int xMoveNew = xMove1 * (-1);
+
+    Serial.println(xMove1 * (-1));
+
+    delay(2000);
+
+    xStepper.move(-xMoveNew);
+
+    xStepper.runToPosition();
+
+    delayMicroseconds(1000);
+
+  }
+
+  else {
+
+    int xMoveNew = xMove1;
+
+    Serial.println(xMove1);
+
+    delay(2000);
+
+    xStepper.move(xMoveNew);
+
+    xStepper.runToPosition();
+
+    delayMicroseconds(1000);
+
+  }
+
+  }
+}
+
+ 
+
+    //XpulseCalc = Serial.read();
+
+    //Serial.print("YpulseCalc: ");
+
+   
+
+    //Serial.print("YpulseCalc +: ");
+
+    //Serial.println(YpulseCalc
+
+    //Serial.print("XpulseCalc: ");
+
+    //Serial.println(XpulseCalc);
+
+   
+
+
+
+      // Enables the motor to move in a particular direction
+
+      // Makes 200 pulses for making one full cycle rotation
+
+      //for (int x = 0; x < yMoveNew; x++) {
+
+     
+
+        //digitalWrite(stepX, HIGH);
+
+       
+
+        //digitalWrite(stepX, LOW);
+
+//}
