@@ -2,7 +2,7 @@
 
 I have written quite a bit of random code for the serial communicaiton between the Pi and Arduino and honestly just really confused now. 
 
-This is the process in which I want to run the program...
+This is the process in which I want to run the program... I can work on the other portions of it after this part is figured out. I'm stumped.
 
 1. Arduino sends "Comm's Ready" at the beginning to alert the Pi the serial is working. Once Pi receives "Comm's Ready", proceed with the image processing portion of the program. I believe I called it 'openCV()' in the python code.
 
