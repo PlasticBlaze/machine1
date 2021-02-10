@@ -11,3 +11,6 @@ This is the process in which I want to run the program... I can work on the othe
 3. Once the stepper has completed that move I want it to serially send a confirmation called yMovementComplete. This tells the Pi to now send the 'XpulseEncode' value. Once again send the 'xMovementComplete' signal back to the Pi to let it know it has finished that move.
 
 There is probably a better flow/ easier flow to write but that's just how I was thinking. (Sending both pulseEncode values at once but performing one then the other?). There is a lot of random code in there that I have been trying out so some stuff is in there and not even being used. 
+
+
+I found an example of another project somebody has completed that seems to be doing a relatively similar process flow. I'm just having trouble following his program. I figured somebody that knows python would better be able to tell what hes doing for the communication aspect. https://github.com/pacogarcia3/hta0-horizontal-robot-arm
