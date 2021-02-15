@@ -14,3 +14,5 @@ There is probably a better flow/ easier flow to write but that's just how I was 
 
 
 I found an example of another project somebody has completed that seems to be doing a relatively similar process flow. I'm just having trouble following his program. I figured somebody that knows python would better be able to tell what hes doing for the communication aspect. https://github.com/pacogarcia3/hta0-horizontal-robot-arm
+
+Here is another example (albeit has a lot of other pointless stuff going on). Mostly concerned with writing the portion that pertains to the serial communication and setting states from 0 to 1 in order to control the flow or timeline (handshaking) of the program between the two boards. https://github.com/ANM-P4F/ProductSortingSystem/blob/master/arduino/actuator/actuator.ino
