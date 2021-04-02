@@ -1,297 +1,257 @@
+// I have an arduino board with a motor shield on top to drive the wheels. I have written a couple commands in here but still need to add like all of the refinement,
+// tool offset, out-of-boundary, and routine commands that pertain to the driving of the bot.
+
+
+
 #include <AccelStepper.h>
 
-
-
-AccelStepper yStepper(AccelStepper::DRIVER, 2, 5);
-AccelStepper xStepper(AccelStepper::DRIVER, 3, 6);
-
-
+const int stepperCount = 2;
+AccelStepper yStepper(AccelStepper::FULL2WIRE, 2, 5);
+AccelStepper xStepper(AccelStepper::FULL2WIRE, 3, 6);
 
 // defines pins numbers
 
 //Front left wheel
-
 const int stepX = 2;
-
 const int dirX  = 5;
 
-
-
 //Front right wheel
-
 const int stepY = 3;
-
 const int dirY  = 6;
 
-
-
 //Back left wheel
-
 const int stepZ = 4;
-
 const int dirZ  = 7;
 
-
-
 //Back right wheel
-
 const int stepA = 12;
-
 const int dirA  = 13;
-
-
-
 const int enPin = 8;
 
 
-yMovementComplete = false;
-xMovementComplete = false;
+char split = ':';         //this is the character that would be used for seperating the different parts of your commands
+                          //the syntax for commands would be:   command:value1:value2
+
+int listSize = 5;                                     //the amount of commands in the list
+String commands[] = {"hello", "add", "sub", "YMOV", "XMOV"};     //the list of every command name
 
 
-
-
-void setup() {
-
-  yStepper.setMaxSpeed(800);
+void setup()
+{
+  Serial.begin(9600);     //sets the data transfer rate for the serial interface
+                          //9600 is good for basic testing, but should be as high
+                          //as possible for both devices.
+  yStepper.setMaxSpeed(4000);
   yStepper.setAcceleration(400);
-  xStepper.setMaxSpeed(800);
+  xStepper.setMaxSpeed(4000);
   xStepper.setAcceleration(400);
- 
-
-  Serial.begin(9600);
-  delayMicroseconds(1000);
-
-  Serial.println("Comm's Ready");
-
-
-
-  // Sets the pins as Outputs
 
   pinMode(stepX, OUTPUT);
-
   pinMode(dirX, OUTPUT);
-
-
-
+ 
   pinMode(stepY, OUTPUT);
-
   pinMode(dirY, OUTPUT);
-
-
-
+ 
   pinMode(stepZ, OUTPUT);
-
   pinMode(dirZ, OUTPUT);
-
-
 
   pinMode(enPin, OUTPUT);
 
-
-
   digitalWrite(enPin, LOW);
-
   digitalWrite(dirX, HIGH);
-
   digitalWrite(dirY, HIGH);
-
   digitalWrite(dirZ, HIGH);
-
   digitalWrite(dirA, HIGH);
+}
 
+void loop()
+{
+  CommCheck();            //checks serial buffer for data commands
 }
 
 
+void CommCheck()
+{
+  if(Serial.available())                    //checks to see if there is serial data has been received
+  {
+    //int len = Serial.available();           //stores the character lengh of the command that was sent
+                                             //this is used for command parsing later on
+                                           
+    String command = Serial.readString();   //stores the command as a text string
+    int len = command.length();
+    //Serial.println(command);
+    Serial.flush();
+    //command.remove(len-2,1);                //removes characters added by the pi's serial data protocol
+    //command.remove(0,2);
+    //len -= 3;                               //updates the string length value for parsing routine
 
-void loop() {
-
-
-  //moveRoutine();
-
-  //picSignal();
-
-  getPos1();
-
-  getPos2();
-
-  //picRefineSignal();
-
-  //fixDivot();
-
- 
-
-}
-
-
-
-//void moveRoutine() {
-
-//INSERT DISTANCE FOR NEW IMAGE BELOW FOR moveRoutineDist integer
-
-    //int moveRoutineDist = 2000;
-
-    //delay(2000);
-
-    //yStepper.move(moveRoutineDist);
-    //xStepper.move(moveRoutineDist);
-
-    //yStepper.runToPosition();
-    //xStepper.runToPosition();
-
-    //delayMicroseconds(2000);
-
-//}
-
-
-
-//void picSignal() {
-
-
-
-
-
-//}
-
-
-
-void getPos1() {
-
- 
-
-  String YpulseEncode;
-
-  if (Serial.available() > 0) {          
-
-    YpulseEncode = Serial.readStringUntil('\n');
-
-    int yMove1 = YpulseEncode.toInt();
-
+    int points[2] = {0, 0};                 //offset points for where we need to split the command into its individual parts
    
+    for(int x = 0; x < len; x++)            //this loop will go through the entire command to find the split points based on
+    {                                       //what the split variable declared at the top of the script is set to.
+      //Serial.print("Char ");
+      //Serial.print(x);
+      //Serial.print("- ");
+      //Serial.println(command[x]);
+      if(command[x] == split)               //this goes through every character in the string and compares it to the split character
+      {
+        if(points[0] == 0)                  //if the first split point hasn't been found, set it to the current spot
+        {
+          points[0] = x;
+        }
+        else                                //if the first spot was already found, then set the second split point
+        {                                   //this routine is currently only set up for a command syntax that is as follows
+          points[1] = x;                    //command:datavalue1:datavalue2
+        }
+      }
+    }
+    CommParse(command, len, points[0], points[1]);      //now that we know the command, command length, and split points,
+  }                                                     //we can then send that information out to a routine to split the data
+}                                                       //into individual values.
 
-  if (yMove1 < 0) {
+void CommParse(String command, int len, int point1, int point2)
+{
+  //Serial.print("Command Length: ");
+  //Serial.println(len);
+  //Serial.print("Split 1: ");
+  //Serial.println(point1);
+  //Serial.print("Split 2: ");
+  //Serial.println(point2);
 
-    int yMoveNew = yMove1 * (-1);
+ 
+  String com = command;                 //copy the full command into all 3 parts
+  String val1 = command;                //this is needed for the string manipulation
+  String val2 = command;                //that follow
 
-    Serial.println(yMove1 * (-1));
+  com.remove(point1, len - point1);     //each of these use the string remove to delete
+  val1.remove(point2, len - point2);    //the parts of the command that aren't needed
+  val1.remove(0, point1 + 1);           //basically splitting the command up into its
+  val2.remove(0, point2 + 1);           //individual pieces
+  val2.remove(val2.length()-1,1);
 
-    delay(2000);
+  CommLookup(com, val1, val2);    //these pieces are then sent to a lookup routine for processing
+}
 
+
+void CommLookup(String com, String val1, String val2)
+{
+  //Serial.println("Command received");
+  //Serial.print("Command: ");
+  //Serial.print(com);
+  //Serial.println(".");
+  //Serial.print("Value 1: ");
+  //Serial.print(val1);
+  //Serial.println(".");
+  //Serial.print("Value 2: ");
+  //Serial.print(val2);
+  //Serial.println(".");
+
+
+ 
+ 
+  int offset = 255;                   //create a variable for our lookup table's offest value
+                                      //we set this to 255 because there won't be 255 total commands
+                                      //and a valid command can be offset 0, so it's just to avoid
+                                      //any possible coding conflicts if the command sent doesn't
+                                      //match anything.
+                                     
+  for(int x = 0; x < listSize; x++)   //this goes through the list of commands and compares
+  {                                   //them against the command received
+    if(commands[x] == com)
+    {
+      offset = x;                     //if the command matches one in the table, store that command's offset
+    }
+  }
+ 
+  switch(offset)                //this code compares the offset value and triggers the appropriate command
+  {
+    case 0:                                 //essentially a hello world.                       |  Syntax: hello:null:null
+      CommHello();                          //this activates the hello world subroutine        |  returns Hello!
+      break;
+    case 1:                                 //adds both values together and return the sum.    |  Syntax: add:value1:value2
+      CommAdd(val1.toInt(), val2.toInt());  //this activates the addition subroutine           |  returns value1 + value2
+      break;
+    case 2:                                 //subtracts both values and return the difference  |  Syntax: subtract:value1:value2
+      CommSub(val1.toInt(), val2.toInt());  //this activates the subtraction subroutine        |  returns value1 - value2
+      break;
+    case 3:
+      yMovement(val1.toInt(), val2.toInt());
+      break;
+    case 4:
+      xMovement(val1.toInt(), val2.toInt());
+    default:                                        //this is the default case for the command lookup and will only
+      Serial.println("Command not recognized");     //trigger if the command sent was not known by the arduino
+      break;
+  }
+}
+
+
+void CommHello()                               //each of these routines are what will be triggered when they are successfully processed
+{
+  Serial.println("Hello!");
+  CommConfirm();
+}
+
+void CommAdd(int val1, int val2)
+{
+  Serial.println(val1 + val2);
+  CommConfirm();
+}
+
+void CommSub(int val1, int val2)
+{
+  Serial.println(val1 - val2);
+  CommConfirm();
+}
+
+void yMovement(int val1, int val2)
+{
+  if (val1 < 0) {
+    int yMoveNew = val1 * (-4);
+    //Serial.println(val1 * (-1));
+    delay(1000);
     yStepper.move(-yMoveNew);
-
     yStepper.runToPosition();
-
-    delayMicroseconds(1000);
-
+    delayMicroseconds(500);
   }
 
   else {
 
-    int yMoveNew = yMove1;
-
-    Serial.println(yMove1);
-
-    delay(2000);
-
+    int yMoveNew = val1 * 4;
+    //Serial.println(val1);
+    delay(1000);
     yStepper.move(yMoveNew);
-
     yStepper.runToPosition();
-
-    delayMicroseconds(2000);
+    delayMicroseconds(500);
    
-    Serial.println("Movement Complete");
-
-    yMoveComplete = true;
-
   }
-
-
-
-  }
+  CommConfirm();
 }
 
-
-
-
-void getPos2() {
-
-
-  String XpulseEncode;
-
-  if (Serial.available() > 0) {          
-
-    XpulseEncode = Serial.readStringUntil('\n');
-
-    int xMove1 = XpulseEncode.toInt();
-
-   
-
-  if (xMove1 < 0) {
-
-    int xMoveNew = xMove1 * (-1);
-
-    Serial.println(xMove1 * (-1));
-
-    delay(2000);
-
+void xMovement(int val1, int val2)
+{
+  if (val1 < 0) {
+    int xMoveNew = val1 * (-4);
+    //Serial.println(val1 * (-1));
+    delay(1000);
     xStepper.move(-xMoveNew);
-
     xStepper.runToPosition();
-
-    delayMicroseconds(1000);
-
+    delayMicroseconds(500);
   }
 
   else {
 
-    int xMoveNew = xMove1;
-
-    Serial.println(xMove1);
-
-    delay(2000);
-
+    int xMoveNew = val1 * 4;
+    //Serial.println(val1);
+    delay(1000);
     xStepper.move(xMoveNew);
-
     xStepper.runToPosition();
-
-    delayMicroseconds(1000);
-
+    delayMicroseconds(500);
+   
   }
-
-  }
+  CommConfirm();
 }
-
- 
-
-    //XpulseCalc = Serial.read();
-
-    //Serial.print("YpulseCalc: ");
-
-   
-
-    //Serial.print("YpulseCalc +: ");
-
-    //Serial.println(YpulseCalc
-
-    //Serial.print("XpulseCalc: ");
-
-    //Serial.println(XpulseCalc);
-
-   
-
-
-
-      // Enables the motor to move in a particular direction
-
-      // Makes 200 pulses for making one full cycle rotation
-
-      //for (int x = 0; x < yMoveNew; x++) {
-
-     
-
-        //digitalWrite(stepX, HIGH);
-
-       
-
-        //digitalWrite(stepX, LOW);
-
-//}
+void CommConfirm()                                    //this is an example of what a command confirmation send back would be and can be replaced
+{                                                     //with something better in the future.
+  Serial.println("Done");
+}
