@@ -37,14 +37,14 @@ char split = ':';         //this is the character that would be used for seperat
                           //the syntax for commands would be:   command:value1:value2
 
 int listSize = 5;                                     //the amount of commands in the list
-String commands[] = {"hello", "add", "sub", "YMOV", "XMOV"};     //the list of every command name
+String commands[] = {"hello", "add", "toolOFFSET", "YMOV", "XMOV"};     //the list of every command name
 
 
 void setup() 
 {
-  Serial.begin(115200);     //sets the data transfer rate for the serial interface
-                          //9600 is good for basic testing, but should be as high
-                          //as possible for both devices.
+  Serial.begin(115200);     
+                          
+                          
   FRStepper.setMaxSpeed(300);
   FRStepper.setAcceleration(200);
   BRStepper.setMaxSpeed(300);
@@ -224,10 +224,29 @@ void CommAdd(int val1, int val2)
   CommConfirm();
 }
 
-void CommSub(int val1, int val2)
+void toolOFFSET(int val1, int val2)
 {
-  Serial.println(val1 - val2);
-  CommConfirm();
+for(int x = 0; x < (1000); x++) {              //CHANGE THIS VALUE FOR TOOL OFFSET
+
+      digitalWrite(dirX, HIGH);
+      digitalWrite(stepX,HIGH);
+      digitalWrite(dirY, HIGH);
+      digitalWrite(stepY,HIGH);
+      digitalWrite(dirZ, HIGH);
+      digitalWrite(stepZ,HIGH);
+      digitalWrite(dirA, HIGH);
+      digitalWrite(stepA,HIGH);
+
+      delayMicroseconds(250);
+
+      digitalWrite(stepX,LOW);
+      digitalWrite(stepY,LOW);
+      digitalWrite(stepZ,LOW);
+      digitalWrite(stepA,LOW);
+
+      delayMicroseconds(250);
+    }
+    CommConfirm();
 }
 
 void yMovement(int val1, int val2)
@@ -249,7 +268,7 @@ void yMovement(int val1, int val2)
       digitalWrite(stepY,HIGH);
       digitalWrite(dirZ, LOW);
       digitalWrite(stepZ,HIGH);
-      digitalWrite(dirA,LOW);
+      digitalWrite(dirA, LOW);
       digitalWrite(stepA,HIGH);
 
       delayMicroseconds(250);
@@ -281,7 +300,7 @@ void yMovement(int val1, int val2)
       digitalWrite(stepY,HIGH);
       digitalWrite(dirZ, HIGH);
       digitalWrite(stepZ,HIGH);
-      digitalWrite(dirA,HIGH);
+      digitalWrite(dirA, HIGH);
       digitalWrite(stepA,HIGH);
 
       delayMicroseconds(250);
@@ -317,7 +336,7 @@ void xMovement(int val1, int val2)
       digitalWrite(stepY,HIGH);
       digitalWrite(dirZ, HIGH);
       digitalWrite(stepZ,HIGH);
-      digitalWrite(dirA,LOW);
+      digitalWrite(dirA, LOW);
       digitalWrite(stepA,HIGH);
 
       delayMicroseconds(250);
@@ -352,7 +371,7 @@ void xMovement(int val1, int val2)
       digitalWrite(stepY,HIGH);
       digitalWrite(dirZ, LOW);
       digitalWrite(stepZ,HIGH);
-      digitalWrite(dirA,HIGH);
+      digitalWrite(dirA, HIGH);
       digitalWrite(stepA,HIGH);
 
       delayMicroseconds(250);
