@@ -1,21 +1,34 @@
 # machine1
 
-Project Flow -->
-Turn device on, Hole Selection GUI, Run (routine) and then stop for image taking. Open realsense pipeline to (TakeImage) --> Take/ process image. Evaluate and send (xMove and yMove) pulse counts to arduino motor board. --> Move to respective locations in each axis, then send (xMoveComplete and yMoveComplete) (confirmation) back to Pi. --> Pi performs TakeImage again to see if the object is in the center of the image frame ***Not sure if Pi should determine this or if Arduino should determine this, but I want to set a threshold, ‘if more than (20 mm?) off in either axis perform movements again’*** If over threshold, send (xMoveRefinement) and (yMoveRefinement). --> Perform refinement movements if threshold reached, then add another movement command in arduino code to move to tool (Tool Offset), then (Fix divot), once complete perform (routine)
+From a program flow perspective, please break code into functions that make sense if needed. If the 'routine' function includes to much code, just break it into multiple functions if needed. I was building one part at a time so it might seem really confusing. Sorry about that.
+
+Program Flow -->
+
+HMI - Let user make selection for the hole
+loop >
+Travel function - Moves robot to new location
+getPoint - gets current location
+check - current location checked against boundary coordinates - if not, run ReverseTravel function
+routine - takes image and finds contour to fix - currently this immediately sends step counts to arduino. Re-take image to confirm we centered the imager to the found contour, if not/ move again until it is.
+tool offset - just leave this commented out for now in the overall program and I will add later
+fix divot - fixes contour, just leave this commented out for now in the overall program and I will add later
+< loop
 
 
-Variables -->
-(Routine): All 4 stepper motors travel far enough to get a new image. For example, if the image frame is 3 feet in height, the pulse count will be enough to travel greater than 3 feet so that a new area is being inspected.
+Functions -->
+(HMI): The current HMI is just 18 buttons right now, that should reference a csv file somewhere on the documents that contains an array of coordinates. The array of coordinates should be stored so that throughout the program running, it can be referenced as a boundary to the current location of the robot.
 
-(TakeImage): Runs realsense capture and OpenCV portion. Might want to change this portion in the future. Will still send the same variables to Arduino.
+(Travel): I need a new function called travel that will move all 4 stepper motors far enough to get a new image. For example, if the image frame is 3 feet in height, the pulse count will be enough to travel greater than 3 feet so that a new area is being inspected. I can add the number of pulses later but it should be similar to the current comms() function. the serial write variables will just be fixed amounts. there might be multiple travel commands such as the routine one then an error handling one for when the current position is outside of the boundaries (ReverseTravel?)
 
-(RefineImage): The movement refinement I talked about to confirm it’s at the correct location.
+(Routine): Runs realsense capture and OpenCV portion. After we take the first image and it finds a contour and moves the robot over top of it, I want it to take another image to confirm we centered the contour to the imager.
 
-(xMoveRefinement and yMoveRefinement): Same as (xMove and yMove) but has a threshold. Maybe the threshold should also be set on the initial movements too so that if the divot is aligned on either of the axis, it won’t try to move. 
+(getPoint): this function recieves current GPS location and needs to return the current coordinate point to be checked against the boundary
 
-(Tool Offset): This is because the movements are intended to align the divot with the center of the image taken. The divot fixing tool obviously cannot be in the center of the image so I imagined it offset some distance that the bot will need to travel in order to actually align the divot and tool.
+(check): checks current location
 
-(FixDivot): This function will be driving the servo with tool attached.
+*(xMoveRefinement and yMoveRefinement): Same as (xMove and yMove) but has a threshold. Maybe the threshold should also be set on the initial movements too so that if the divot is aligned on either of the axis, it won’t try to move. ***We can work on this later***
 
+*(Tool Offset): This is because the movements are intended to align the divot with the center of the image taken. The divot fixing tool obviously cannot be in the center of the image so I imagined it offset some distance that the bot will need to travel in order to actually align the divot and tool. ***We can work on this later***
 
-Maybe the GPS coordinates should be checked after each (Routine) distance traveled because it will have just moved to a new location. and the Check() function can be called.
+*(FixDivot): This function will be driving the servo with tool attached. ***I can work on this later***
+
