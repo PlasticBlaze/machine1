@@ -1,3 +1,69 @@
+import pyrealsense2 as rs
+import cv2
+import json
+import time
+import math
+import serial
+from tkinter import *
+import pandas as pd
+from shapely.geometry.polygon import Polygon
+from shapely.geometry import Point
+import numpy as np
+import serial
+import time
+from ublox_gps import UbloxGps
+
+
+'''def getpoint():
+    port = serial.Serial('/dev/serial0', baudrate=38400, timeout=1)
+    gps = UbloxGps(port)
+
+
+    maxTime = 5
+    startTime = time.time()
+
+    dataLatSum = []
+    dataLonSum = []
+
+    try:
+        print("Listening for UBX Messages")
+        while (time.time() - startTime) < maxTime:
+            try:
+                geo = gps.geo_coords()
+                print("Longitude: ", geo.lon)
+                print("Latitude: ", geo.lat)
+                #print("Heading of Motion: ", geo.headMot)
+                dataLatSum.append(float(geo.lat))
+                dataLonSum.append(float(geo.lon))
+            except (ValueError, IOError) as err:
+                print(err)
+
+    finally:
+        port.close()
+        avgLatCoord = (sum(dataLatSum) / len(dataLatSum))
+        avgLonCoord = (sum(dataLonSum) / len(dataLonSum))
+        print("Average Lat: ", avgLatCoord)
+        print("Average Lon: ", avgLonCoord)
+        point1 = Point("avgLatCoord", "avgLonCoord")
+        return point1
+
+
+'''
+# this is the function that I want to be called after getPoint is called at some point in the program
+# to check and see if the robot is still within the boundaries, if false, turn around and get back in (maybe I'll
+# add some distance calculations)/ if true, continue routine of fixing
+'''def Check(point1):
+    # polygon = coordinateFile(x)
+    print(polygon)
+    #point = getPoint()
+    print(point1)
+    posCheck = (polygon.contains(point1))
+    print(posCheck)
+
+'''
+
+#def HMI():
+
 root = Tk()
 root.title("Select Hole")
 
@@ -56,11 +122,12 @@ button_16.grid(row=2, column=7)
 button_17.grid(row=2, column=8)
 button_18.grid(row=2, column=9)
 
-root.mainloop()
+#root.mainloop()
 
 
 def routine():
     # Sets threshold for min & max divot size to fix (units: Pixels)
+    print("trying")
     minDivot = 125
     # Sets resized pixel count for x and y axis
     pX = int(848)
@@ -200,7 +267,7 @@ def routine():
             #rmask_u8 = cv2.resize(mask_u8, (pX, pY))
             cv2.imshow("Canvas", rcanvas)
             #cv2.imshow("Big Mask", rmask_u8)
-            #cv2.imshow("Blur", rblur)
+            cv2.imshow("Blur", rblur)
 
             '''''''''''''''''''''''''''''''''''''''''''''''
             'Diameter of wheel is 97mm currently          '
@@ -265,12 +332,16 @@ def comms():
             #break
 
 def main_loop():
-    coordinates = coordinateFile(x)
-    
-    while True:
+    root.mainloop()
+
+    if root.x is not None:
+        x = root.x
+        coordinates = coordinateFile(x)
+
         routine()
-        
+
         # function sequence
 
 if __name__ == "__main__":
+    root.x = None
     main_loop()
