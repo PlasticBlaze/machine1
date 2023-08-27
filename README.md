@@ -1,5 +1,7 @@
 # machine1
 
+I think the combinedWrong.py is the latest where I began putting everything together so I would work from that. 
+
 From a program flow perspective, please break code into functions that make sense if needed. If the 'routine' function includes to much code, just break it into multiple functions if needed. I was building one part at a time so it might seem really confusing. Sorry about that.
 
 ***********************************************************
