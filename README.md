@@ -1,17 +1,37 @@
 # Robot navigation & control
 
 ## Overview
+
 This project involves controlling a robot's navigation and operation based on input from a RealSense camera and GPS data. The robot is intended to perform tasks within predefined boundaries and make decisions based on its location within those boundaries.
 
+## Requirements
+
+### Software
+
+    - Python 3.x
+    - Libraries: pyrealsense2, numpy, OpenCV (cv2), pandas, shapely, tkinter, serial, ublox_gps
+
+### Hardware
+
+    - Raspberry Pi Board
+    - Ublox GPS Module
+    - RealSense Camera
+
 ## Setup
+
 1. Clone the following repository:
+
+    ```bash
+        git clone https://github.com/.../robot-control-project
+        cd robot-control-project
     ```
-    https://github.com/.../robot-control-project
-    ```
+
 2. Install the needed libraries
+    
+    ```bash
+        sudo pip3 install -r requirements.tx
     ```
-    pip install -r requirements.tx
-    ```
+
 3. Configure the necessary hardware (connect the RealSense camera and the GPS device).
 
 ## Usage
@@ -29,9 +49,9 @@ This project involves controlling a robot's navigation and operation based on in
 - Check: Compares the current location against boundary coordinates. If the current location is outside the boundaries, the ReverseTravel function is executed.
 
 - Routine:
-    - Captures an image using a Realsense camera and processes it with OpenCV.
-    - Identifies contours in the image and positions the robot over the target contour.
-    - Captures another image to confirm proper alignment with the contour.
+  - Captures an image using a Realsense camera and processes it with OpenCV.
+  - Identifies contours in the image and positions the robot over the target contour. 
+  - Captures another image to confirm proper alignment with the contour.
 
 - Tool Offset (commented out for now): A placeholder for adjusting robot movements to align the tool with the center of the image. This offset is applied to ensure accurate alignment of the tool with the identified contour.
 
@@ -56,8 +76,8 @@ This project involves controlling a robot's navigation and operation based on in
 - FixDivot: This function, when implemented, will control a servo with an attached tool for fixing contours. The servo-driven tool will perform the contour correction.
 
 ### Execution
-Run the `compatibleWrong.py` function to start the process.
 
+Run the `./tests/compatibleWrong.py` function to start the process.
 
 <!---
 comments syntax
