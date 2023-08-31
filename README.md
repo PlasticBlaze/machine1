@@ -29,7 +29,7 @@ This project involves controlling a robot's navigation and operation based on in
 1. Clone the following repository:
 
     ```bash
-        git clone https://github.com/machine1
+        git clone https://github.com/PlasticBlaze/machine1.git
         cd machine1
     ```
 
