@@ -18,7 +18,7 @@ from interface import HMI, polygon
 from tools import fix_divot, tool_ofset
 
 # Global constants
-PROJECT_PATH = "/home/pi/machine"
+PROJECT_PATH = "/home/pi/projects/machine1"
 PORT_SERIAL = "/dev/serial0"
 
 

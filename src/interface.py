@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from shapely.geometry.polygon import Polygon
 
-PROJECT_PATH = "/home/pi/machine"
+PROJECT_PATH = "/home/pi/projects/machine1"
 
 
 def HMI():
