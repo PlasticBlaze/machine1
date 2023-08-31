@@ -19,20 +19,33 @@ This project involves controlling a robot's navigation and operation based on in
 
 ## Setup
 
+0. Create a working directory
+
+    ```bash
+        mkdir projects
+        cd projects
+    ```
+
 1. Clone the following repository:
 
     ```bash
-        git clone https://github.com/.../robot-control-project
-        cd robot-control-project
+        git clone https://github.com/machine1
+        cd machine1
     ```
 
 2. Install the needed libraries
     
     ```bash
-        sudo pip3 install -r requirements.tx
+        sudo pip3 install -r requirements.txt
     ```
 
-3. Configure the necessary hardware (connect the RealSense camera and the GPS device).
+3. Run the script
+
+    ```bash
+        sudo python3 main.py
+    ```
+
+4. Configure the necessary hardware (connect the RealSense camera and the GPS device).
 
 ## Usage
 
