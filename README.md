@@ -39,13 +39,17 @@ This project involves controlling a robot's navigation and operation based on in
         sudo pip3 install -r requirements.txt
     ```
 
-3. Run the script
+3. Install RealSense drivers
+   [Raspberry Pi 4](https://github.com/datasith/Ai_Demos_RPi/wiki/Raspberry-Pi-4-and-Intel-RealSense-D435)
+   [Issue](https://github.com/IntelRealSense/librealsense/issues/10033)
+
+4. Run the script
 
     ```bash
         sudo python3 main.py
     ```
 
-4. Configure the necessary hardware (connect the RealSense camera and the GPS device).
+5. Configure the necessary hardware (connect the RealSense camera and the GPS device).
 
 ## Usage
 
