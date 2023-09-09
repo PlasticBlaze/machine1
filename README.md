@@ -46,7 +46,7 @@ This project involves controlling a robot's navigation and operation based on in
 4. Run the script
 
     ```bash
-        sudo python3 main.py
+        python3.9 main.py
     ```
 
 5. Configure the necessary hardware (connect the RealSense camera and the GPS device).
