@@ -18,7 +18,7 @@ from src.interface import HMI
 from src.tools import fix_divot, tool_ofset
 
 # Global constants
-PROJECT_PATH = "/home/pi/projects/machine1"
+PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 PORT_SERIAL = "/dev/serial0"
 
 
