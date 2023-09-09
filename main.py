@@ -14,8 +14,8 @@ from shapely.geometry import Point
 from ublox_gps import UbloxGps
 
 # Call functions from the src directory
-from interface import HMI, polygon
-from tools import fix_divot, tool_ofset
+from src.interface import HMI, polygon
+from src.tools import fix_divot, tool_ofset
 
 # Global constants
 PROJECT_PATH = "/home/pi/projects/machine1"
