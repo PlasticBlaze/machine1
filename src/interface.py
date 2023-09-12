@@ -36,7 +36,7 @@ def HMI():
             )
             y_array = df_y.to_numpy()
             lats_long_array = np.column_stack((x_array, y_array))
-            print(csv)
+            print(lats_long_array)
             return Polygon(lats_long_array)
 
         elif x == 2:
