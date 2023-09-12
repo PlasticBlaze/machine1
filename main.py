@@ -267,7 +267,7 @@ def check(point1):
     if true, continue routine of fixing
     """
     # polygon = coordinateFile(x)
-    print(polygon)
+    #print(polygon)
     # point = getPoint()
     print(point1)
     pos_check = polygon.contains(point1)
