@@ -19,7 +19,7 @@ from src.tools import fix_divot, tool_ofset
 
 # Global constants
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
-PORT_SERIAL = "/dev/serial0"
+#PORT_SERIAL = "/dev/serial0"
 
 
 def routine():
@@ -227,7 +227,7 @@ def routine():
 
 
 def getpoint():
-    port = serial.Serial(PORT_SERIAL, baudrate=38400, timeout=1)
+    '''port = serial.Serial(PORT_SERIAL, baudrate=38400, timeout=1)
     gps = UbloxGps(port)
 
     max_time = 5
@@ -254,8 +254,9 @@ def getpoint():
         avgLatCoord = sum(data_lat_sum) / len(data_lat_sum)
         avgLonCoord = sum(data_lon_sum) / len(data_lon_sum)
         print("Average Lat: ", avgLatCoord)
-        print("Average Lon: ", avgLonCoord)
-        point1 = Point("avgLatCoord", "avgLonCoord")
+        print("Average Lon: ", avgLonCoord)'''
+        #point1 = Point("avgLatCoord", "avgLonCoord")
+        point1 = Point(-85.5911993, 38.2348362)
         return point1
 
 
