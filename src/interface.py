@@ -21,7 +21,7 @@ def HMI():
     root.title("Select Hole")
 
     def coordinate_file(x):
-        global polygon
+        #global polygon
         if x == 1:
             df_x = pd.read_csv(
                 f"{PROJECT_PATH}/data/HCC1-1.csv",
@@ -36,7 +36,8 @@ def HMI():
             )
             y_array = df_y.to_numpy()
             lats_long_array = np.column_stack((x_array, y_array))
-            polygon = Polygon(lats_long_array)
+            print(csv)
+            return Polygon(lats_long_array)
 
         elif x == 2:
             csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
