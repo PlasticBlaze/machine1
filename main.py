@@ -247,10 +247,10 @@ def getpoint():
                 data_lat_sum.append(float(geo.lat))
                 data_lon_sum.append(float(geo.lon))
             except (ValueError, IOError) as err:
-                print(err)
+                print(err)'''
 
     finally:
-        port.close()
+        '''port.close()
         avgLatCoord = sum(data_lat_sum) / len(data_lat_sum)
         avgLonCoord = sum(data_lon_sum) / len(data_lon_sum)
         print("Average Lat: ", avgLatCoord)
