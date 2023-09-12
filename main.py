@@ -234,10 +234,10 @@ def getpoint():
     start_time = time.time()
 
     data_lat_sum = []
-    data_lon_sum = []
+    data_lon_sum = []'''
 
     try:
-        print("Listening for UBX Messages")
+        '''print("Listening for UBX Messages")
         while (time.time() - start_time) < max_time:
             try:
                 geo = gps.geo_coords()
