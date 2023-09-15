@@ -40,9 +40,9 @@ def HMI():
             print(lats_long_array)
             PolygonHole = Polygon(lats_long_array)
             #return Polygon(lats_long_array)
-            return PolygonHole
+            
             root.destroy()
-    
+            return PolygonHole
         
         elif x == 2:
             csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
