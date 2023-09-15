@@ -6,7 +6,8 @@ from tkinter import Button, Tk
 
 import numpy as np
 import pandas as pd
-from shapely.geometry.polygon import Polygon
+#from shapely.geometry.polygon import Polygon
+from shapely.geometry import Polygon
 
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 
@@ -37,7 +38,9 @@ def HMI():
             y_array = df_y.to_numpy()
             lats_long_array = np.column_stack((x_array, y_array))
             print(lats_long_array)
-            return Polygon(lats_long_array)
+            PolygonHole = Polygon(lats_long_array)
+            #return Polygon(lats_long_array)
+            return PolygonHole
 
         elif x == 2:
             csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
