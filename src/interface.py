@@ -41,7 +41,7 @@ def HMI():
             PolygonHole = Polygon(lats_long_array)
             #return Polygon(lats_long_array)
             return PolygonHole
-    return coordinate_file(x)
+    
         
         elif x == 2:
             csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
@@ -231,6 +231,6 @@ def HMI():
     button_17.grid(row=2, column=8)
     button_18.grid(row=2, column=9)
 
-    
+    return coordinate_file(x)
 
     root.mainloop()
