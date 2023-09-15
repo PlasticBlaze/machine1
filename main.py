@@ -21,7 +21,6 @@ from src.tools import fix_divot, tool_offset
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #PORT_SERIAL = "/dev/serial0"
 global PolygonHole
-PolygonHole = None
 
 
 def routine():
