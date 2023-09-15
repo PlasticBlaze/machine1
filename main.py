@@ -269,6 +269,7 @@ def check(PolygonHole, Location):
     if false, turn around and get back in
     if true, continue routine of fixing
     """
+    global PolygonHole
     # polygon = coordinateFile(x)
     #print(polygon)
     # point = getPoint()
@@ -290,7 +291,7 @@ def travel_robot():
 
 if __name__ == "__main__":
     # Run the interface
-    PolygonHole = HMI()
+    HMI()
 
     while True:
         # Move robot to certain location
@@ -301,7 +302,7 @@ if __name__ == "__main__":
         now = getpoint()
 
         # check function returning True if the robot is still within the boundaries
-        if check(PolygonHole, now):
+        if check(now):
             # routine function returning True if the imager is centered to the found contour
             if routine():
                 # End loop when the robot is centered
