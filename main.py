@@ -260,35 +260,6 @@ def routine():
         return point1'''
 
 def getpoint():
-    '''port = serial.Serial(PORT_SERIAL, baudrate=38400, timeout=1)
-    gps = UbloxGps(port)
-
-    max_time = 5
-    start_time = time.time()
-
-    data_lat_sum = []
-    data_lon_sum = []
-
-    try:
-        print("Listening for UBX Messages")
-        while (time.time() - start_time) < max_time:
-            try:
-                geo = gps.geo_coords()
-                print("Longitude: ", geo.lon)
-                print("Latitude: ", geo.lat)
-                # print("Heading of Motion: ", geo.headMot)
-                data_lat_sum.append(float(geo.lat))
-                data_lon_sum.append(float(geo.lon))
-            except (ValueError, IOError) as err:
-                print(err)
-
-    finally:
-        port.close()
-        avgLatCoord = sum(data_lat_sum) / len(data_lat_sum)
-        avgLonCoord = sum(data_lon_sum) / len(data_lon_sum)
-        print("Average Lat: ", avgLatCoord)
-        print("Average Lon: ", avgLonCoord)
-        point1 = Point("avgLatCoord", "avgLonCoord")'''
     Location = Point(-85.5911993, 38.2348362)
     return Location
 
@@ -319,7 +290,7 @@ def travel_robot():
 
 if __name__ == "__main__":
     # Run the interface
-    HMI()
+    PolygonHole = HMI()
 
     while True:
         # Move robot to certain location
@@ -330,7 +301,7 @@ if __name__ == "__main__":
         now = getpoint()
 
         # check function returning True if the robot is still within the boundaries
-        if check(now):
+        if check(PolygonHole, now):
             # routine function returning True if the imager is centered to the found contour
             if routine():
                 # End loop when the robot is centered
