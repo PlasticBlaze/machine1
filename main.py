@@ -20,6 +20,7 @@ from src.tools import fix_divot, tool_offset
 # Global constants
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #PORT_SERIAL = "/dev/serial0"
+global PolygonHole
 
 
 def routine():
@@ -269,7 +270,7 @@ def check(Location):
     if false, turn around and get back in
     if true, continue routine of fixing
     """
-    global PolygonHole
+    #global PolygonHole
     while PolygonHole is None:
         print("PolygonHole is not initialized. Waiting for initialization...")
         time.sleep(1)  # Sleep for 1 second before checking again
