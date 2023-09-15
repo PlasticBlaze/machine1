@@ -232,4 +232,4 @@ def HMI():
     button_18.grid(row=2, column=9)
 
     root.mainloop()
-    
+    return coordinate_file(x)
