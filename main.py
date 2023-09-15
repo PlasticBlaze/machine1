@@ -296,7 +296,7 @@ if __name__ == "__main__":
     PolygonHole = HMI()
 
     while True:
-        global PolygonHole
+        #global PolygonHole
         # Move robot to certain location
         travel_robot()
 
