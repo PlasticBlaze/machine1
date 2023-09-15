@@ -319,7 +319,7 @@ def travel_robot():
 
 if __name__ == "__main__":
     # Run the interface
-    HMI()
+    HMI(x)
 
     while True:
         # Move robot to certain location
