@@ -303,7 +303,8 @@ def check(point1):
     # point = getPoint()
     print(point1)
     pos_check = Polygon.contains(point1)
-    print(pos_check)
+    print(Polygon.contains(point1))
+    print("variable: ", pos_check)
 
     # Return a boolean
     if pos_check:
