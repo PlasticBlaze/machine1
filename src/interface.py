@@ -40,7 +40,7 @@ def HMI():
             print(lats_long_array)
             PolygonHole = Polygon(lats_long_array)
             #return Polygon(lats_long_array)
-            return PolygonHole
+            #return PolygonHole
     
         
         elif x == 2:
@@ -232,4 +232,3 @@ def HMI():
     button_18.grid(row=2, column=9)
 
     root.mainloop()
-    return coordinate_file(x)
