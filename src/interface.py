@@ -10,7 +10,7 @@ import pandas as pd
 from shapely.geometry.polygon import Polygon
 
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
-
+PolygonHole = none
 
 def HMI():
     """
@@ -22,7 +22,7 @@ def HMI():
     root.title("Select Hole")
 
     def coordinate_file(x):
-        #global polygon
+        global PolygonHole
         if x == 1:
             df_x = pd.read_csv(
                 f"{PROJECT_PATH}/data/HCC1-1.csv",
@@ -233,4 +233,3 @@ def HMI():
 
     root.mainloop()
     
-    return coordinate_file(x)
