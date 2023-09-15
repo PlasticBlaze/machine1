@@ -289,10 +289,10 @@ def getpoint():
         print("Average Lat: ", avgLatCoord)
         print("Average Lon: ", avgLonCoord)
         point1 = Point("avgLatCoord", "avgLonCoord")'''
-    point1 = Point(-85.5911993, 38.2348362)
-    return point1
+    currentLoc = Point(-85.5911993, 38.2348362)
+    return CurrentLoc
 
-def check(PolygonHole, point1):
+def check(PolygonHole, currentLoc):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
@@ -301,14 +301,14 @@ def check(PolygonHole, point1):
     # polygon = coordinateFile(x)
     #print(polygon)
     # point = getPoint()
-    print(point1)
-    pos_check = PolygonHole.contains(point1)
-    print(PolygonHole.contains(point1))
+    print(CurrentLoc)
+    pos_check = PolygonHole.contains(CurrentLoc)
+    print(PolygonHole.contains(CurrentLoc))
     print("variable: ", pos_check)
 
     # Return a boolean
     if pos_check:
-        return True, point1, PolygonHole
+        return True, CurrentLoc, PolygonHole
     else:
         return False
 
