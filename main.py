@@ -270,6 +270,9 @@ def check(Location):
     if true, continue routine of fixing
     """
     global PolygonHole
+    while PolygonHole is None:
+        print("PolygonHole is not initialized. Waiting for initialization...")
+        time.sleep(1)  # Sleep for 1 second before checking again
     # polygon = coordinateFile(x)
     #print(polygon)
     # point = getPoint()
