@@ -230,4 +230,6 @@ def HMI():
     button_17.grid(row=2, column=8)
     button_18.grid(row=2, column=9)
 
+    return Coordinate_file(x)
+
     root.mainloop()
