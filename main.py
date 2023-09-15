@@ -14,7 +14,7 @@ from shapely.geometry.point import Point
 from ublox_gps import UbloxGps
 
 # Call functions from the src directory
-from src.interface import HMI, PolygonHole
+from src.interface import HMI
 from src.tools import fix_divot, tool_offset
 
 # Global constants
