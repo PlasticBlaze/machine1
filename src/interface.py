@@ -22,7 +22,7 @@ def HMI():
     root.title("Select Hole")
 
     def coordinate_file(x):
-        global PolygonHole
+        #global PolygonHole
         if x == 1:
             df_x = pd.read_csv(
                 f"{PROJECT_PATH}/data/HCC1-1.csv",
