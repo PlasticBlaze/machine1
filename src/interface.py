@@ -7,7 +7,7 @@ from tkinter import Button, Tk
 import numpy as np
 import pandas as pd
 #from shapely.geometry.polygon import Polygon
-from shapely.geometry import Polygon
+from shapely.geometry.polygon import Polygon
 
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 
