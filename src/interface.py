@@ -40,6 +40,7 @@ def HMI():
             print(lats_long_array)
             PolygonHole = Polygon(lats_long_array)
             #return Polygon(lats_long_array)
+            return PolygonHole
             root.destroy()
     
         
@@ -232,4 +233,4 @@ def HMI():
     button_18.grid(row=2, column=9)
 
     root.mainloop()
-    return PolygonHole
+    
