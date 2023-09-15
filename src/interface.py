@@ -12,7 +12,7 @@ from shapely.geometry.polygon import Polygon
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 
 
-def HMI():
+def HMI(x):
     """
     One time UI selection on start up where worker selects what hole they are on,
     based on button selection it will pull the csv file that contains the coordinates
