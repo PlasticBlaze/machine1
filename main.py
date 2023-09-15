@@ -330,7 +330,7 @@ if __name__ == "__main__":
         getpoint()
 
         # check function returning True if the robot is still within the boundaries
-        if check(getpoint()):
+        if check():
             # routine function returning True if the imager is centered to the found contour
             if routine():
                 # End loop when the robot is centered
