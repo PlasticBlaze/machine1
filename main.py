@@ -292,8 +292,7 @@ def getpoint():
     point1 = Point(-85.5911993, 38.2348362)
     return point1
 
-#def check(PolygonHole, point1):
-def check(PolygonHole):
+def check(PolygonHole, point1):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
@@ -309,7 +308,7 @@ def check(PolygonHole):
 
     # Return a boolean
     if pos_check:
-        return True
+        return True, point1, PolygonHole
     else:
         return False
 
