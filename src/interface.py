@@ -40,7 +40,7 @@ def HMI():
             print(lats_long_array)
             PolygonHole = Polygon(lats_long_array)
             #return Polygon(lats_long_array)
-    return PolygonHole
+            return PolygonHole
     
         
         elif x == 2:
