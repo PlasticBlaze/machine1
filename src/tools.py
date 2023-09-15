@@ -3,7 +3,7 @@ Functions used to adjust parameters
 """
 
 
-def tool_ofset():
+def tool_offset():
     """
     Further description in the future
     """
