@@ -10,7 +10,7 @@ import cv2
 import numpy as np
 import pyrealsense2 as rs
 import serial
-from shapely.geometry import Point
+from shapely.geometry.point import Point
 from ublox_gps import UbloxGps
 
 # Call functions from the src directory
@@ -289,8 +289,8 @@ def getpoint():
         print("Average Lat: ", avgLatCoord)
         print("Average Lon: ", avgLonCoord)
         point1 = Point("avgLatCoord", "avgLonCoord")'''
-    point1 = Point(-85.5911993, 38.2348362)
-    return point1
+    Location = Point(-85.5911993, 38.2348362)
+    return Location
 
 def check(PolygonHole, point1):
     """
