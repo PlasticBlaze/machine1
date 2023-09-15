@@ -14,7 +14,7 @@ from shapely.geometry.point import Point
 from ublox_gps import UbloxGps
 
 # Call functions from the src directory
-from src.interface import HMI(x)
+from src.interface import HMI
 from src.tools import fix_divot, tool_offset
 
 # Global constants
@@ -319,7 +319,7 @@ def travel_robot():
 
 if __name__ == "__main__":
     # Run the interface
-    HMI(x)
+    HMI()
 
     while True:
         # Move robot to certain location
