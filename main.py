@@ -21,6 +21,7 @@ from src.tools import fix_divot, tool_offset
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #PORT_SERIAL = "/dev/serial0"
 global PolygonHole
+PolygonHole = None
 
 
 def routine():
@@ -292,7 +293,7 @@ def travel_robot():
 
 if __name__ == "__main__":
     # Run the interface
-    HMI()
+    PolygonHole = HMI()
 
     while True:
         global PolygonHole
