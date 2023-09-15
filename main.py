@@ -301,14 +301,14 @@ def check(PolygonHole, Location):
     # polygon = coordinateFile(x)
     #print(polygon)
     # point = getPoint()
-    print(point1)
-    pos_check = PolygonHole.contains(point1)
-    print(PolygonHole.contains(point1))
+    print(Location)
+    pos_check = PolygonHole.contains(Location)
+    print(PolygonHole.contains(Location))
     print("variable: ", pos_check)
 
     # Return a boolean
     if pos_check:
-        return True, point1, PolygonHole
+        return True, Location, PolygonHole
     else:
         return False
 
