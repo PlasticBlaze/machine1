@@ -292,7 +292,8 @@ def getpoint():
     point1 = Point(-85.5911993, 38.2348362)
     return point1
 
-def check(PolygonHole, point1):
+#def check(PolygonHole, point1):
+def check(PolygonHole):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
@@ -329,7 +330,7 @@ if __name__ == "__main__":
         point = getpoint()
 
         # check function returning True if the robot is still within the boundaries
-        if check(point, PolygonHole):
+        if check(point):
             # routine function returning True if the imager is centered to the found contour
             if routine():
                 # End loop when the robot is centered
