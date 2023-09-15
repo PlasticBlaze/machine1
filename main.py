@@ -326,10 +326,10 @@ if __name__ == "__main__":
         travel_robot()
 
         # Get current location
-        point = getpoint()
+        CurrentLoc = getpoint()
 
         # check function returning True if the robot is still within the boundaries
-        if check(point):
+        if check(CurrentLoc):
             # routine function returning True if the imager is centered to the found contour
             if routine():
                 # End loop when the robot is centered
