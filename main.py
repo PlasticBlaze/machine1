@@ -295,11 +295,11 @@ if __name__ == "__main__":
     HMI()
 
     while True:
+        global PolygonHole
         # Move robot to certain location
         travel_robot()
 
         # Get current location
-        #CurrentLoc = getpoint()
         now = getpoint()
 
         # check function returning True if the robot is still within the boundaries
