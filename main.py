@@ -294,7 +294,7 @@ def travel_robot():
 if __name__ == "__main__":
     # Run the interface
     PolygonHole = HMI()
-
+    print(PolygonHole)
     while True:
         #global PolygonHole
         # Move robot to certain location
