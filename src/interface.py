@@ -39,6 +39,8 @@ def HMI():
             y_array = df_y.to_numpy()
             lats_long_array = np.column_stack((x_array, y_array))
             polygon = Polygon(lats_long_array)
+            print(polygon)
+            root.destroy()
 
         elif x == 2:
             csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
