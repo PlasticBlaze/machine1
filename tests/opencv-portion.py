@@ -74,8 +74,8 @@ try:
 
 
         # Show images
-        #cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        #cv2.imshow('RealSense', depth_image)
+        cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+        cv2.imshow('RealSense', depth_image)
         #cv2.imshow('color', color_image)
         cv2.waitKey(1)
 
