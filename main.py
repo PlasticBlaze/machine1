@@ -14,14 +14,12 @@ from shapely.geometry.point import Point
 from ublox_gps import UbloxGps
 
 # Call functions from the src directory
-from src.interface import HMI
+from src.interface import HMI, PolygonHole
 from src.tools import fix_divot, tool_offset
 
 # Global constants
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #PORT_SERIAL = "/dev/serial0"
-global PolygonHole
-PolygonHole = None
 
 
 def routine():
@@ -292,8 +290,10 @@ def travel_robot():
 
 
 if __name__ == "__main__":
+    global PolygonHole
     # Run the interface
     PolygonHole = HMI()
+  
     print(PolygonHole)
     while True:
         #global PolygonHole
@@ -317,4 +317,4 @@ if __name__ == "__main__":
             print("PolygonHole is None. Please select a hole in the interface.")
 
         # Add a delay to avoid overwhelming the system with print statements
-        time.sleep(1)
+        time.sleep(3)
