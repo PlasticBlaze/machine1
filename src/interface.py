@@ -10,6 +10,8 @@ from shapely.geometry.polygon import Polygon
 
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 
+polygon = None
+
 
 def HMI():
     """
