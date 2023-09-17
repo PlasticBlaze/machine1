@@ -18,6 +18,9 @@ pY = int(480)
 # Determines center point of captured image to reference the divot coordinates off of.
 # Using resized image pixel count (x, y), find center
 
+# Global constants
+PROJECT_PATH = "/home/plasticblaze/projects/machine1"
+
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ' These are parameters to update once the final design is established                 '
@@ -41,7 +44,10 @@ config.enable_stream(rs.stream.depth, 848, 480, rs.format.z16, 30)
 cfg = pipeline.start(config)
 device = cfg.get_device()
 
-json = json.load(open("/home/pi/PycharmProjects/pythonProject/json_stringTesting.json"))
+json = json.load(open(f"{PROJECT_PATH}/tests/json_stringTesting.json",
+            encoding="utf-8",
+        )
+    ))
 json_string= str(json).replace("'", '\"')
 advanced_mode = rs.rs400_advanced_mode(device)
 advanced_mode.load_json(json_string)
