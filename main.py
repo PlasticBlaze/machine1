@@ -21,7 +21,7 @@ from src.tools import fix_divot, tool_offset
 # Global constants
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #PORT_SERIAL = "/dev/serial0"
-
+polygon = None
 
 def routine():
     """
@@ -264,13 +264,14 @@ def getpoint():
     Location = Point(-85.5911993, 38.2348362)
     return Location
 
-def check(Location, polygon):
+#def check(Location, polygon):
+def check(Location):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
     if true, continue routine of fixing
     """
-    #global PolygonHole
+    global polygon
     # polygon = coordinateFile(x)
     #print(polygon)
     # point = getPoint()
@@ -295,7 +296,7 @@ if __name__ == "__main__":
     # Run the interface
     #PolygonHole = HMI()
     coordinate_file(1)
-    time.sleep(10)
+    time.sleep(2)
     
     print(polygon)
     while True:
