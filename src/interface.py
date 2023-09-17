@@ -11,7 +11,7 @@ from shapely.geometry.polygon import Polygon
 
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #global polygon
-#polygon = None
+polygon = None
 
 def HMI():
     """
@@ -22,35 +22,7 @@ def HMI():
     root = Tk()
     root.title("Select Hole")
 
-    def coordinate_file(x):
-        global polygon
-        if x == 1:
-            df_x = pd.read_csv(
-                f"{PROJECT_PATH}/data/HCC1-1.csv",
-                usecols=[0],
-                header=0,
-            )
-            x_array = df_x.to_numpy()
-            df_y = pd.read_csv(
-                f"{PROJECT_PATH}/data/HCC1-1.csv",
-                usecols=[1],
-                header=0,
-            )
-            y_array = df_y.to_numpy()
-            lats_long_array = np.column_stack((x_array, y_array))
-            print(lats_long_array)
-            polygon = Polygon(lats_long_array)
-            print(polygon)
-            #return Polygon(lats_long_array)
-            
-            root.destroy()
-            #return PolygonHole
-        
-        elif x == 2:
-            csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
-            print(csv)
-
-    # Defining buttons
+     # Defining buttons
     button_1 = Button(
         root,
         text=" 1 ",
@@ -235,4 +207,32 @@ def HMI():
     button_18.grid(row=2, column=9)
 
     root.mainloop()
+
+def coordinate_file(x):
+    global polygon
+    if x == 1:
+        df_x = pd.read_csv(
+            f"{PROJECT_PATH}/data/HCC1-1.csv",
+            usecols=[0],
+            header=0,
+        )
+        x_array = df_x.to_numpy()
+        df_y = pd.read_csv(
+            f"{PROJECT_PATH}/data/HCC1-1.csv",
+            usecols=[1],
+            header=0,
+        )
+        y_array = df_y.to_numpy()
+        lats_long_array = np.column_stack((x_array, y_array))
+        print(lats_long_array)
+        polygon = Polygon(lats_long_array)
+        print(polygon)
+        #return Polygon(lats_long_array)
+        
+        root.destroy()
+        #return PolygonHole
     
+    elif x == 2:
+        csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
+        print(csv)
+
