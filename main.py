@@ -15,7 +15,7 @@ from ublox_gps import UbloxGps
 
 # Call functions from the src directory
 #from src.interface import HMI, PolygonHole
-from src.interface import coordinate_file
+from src.interface import HMI
 from src.tools import fix_divot, tool_offset
 
 # Global constants
