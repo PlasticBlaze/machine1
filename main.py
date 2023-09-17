@@ -51,7 +51,7 @@ def routine():
 
     json_file = json.load(
         open(
-            f"{PROJECT_PATH}/src/config/json_string_testing.json",
+            f"{PROJECT_PATH}/src/config/json_string-testing.json",
             encoding="utf-8",
         )
     )
