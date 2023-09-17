@@ -228,7 +228,7 @@ def coordinate_file(x):
         print(lats_long_array)
         polygon = Polygon(lats_long_array)
         print(polygon)
-        #return Polygon(lats_long_array)
+        return polygon
         
         #root.destroy()
         #return PolygonHole
