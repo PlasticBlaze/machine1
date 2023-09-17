@@ -207,8 +207,7 @@ def HMI():
     button_18.grid(row=2, column=9)
 
     root.mainloop()
-    if x is not None:
-        root.destroy()
+    
 
 def coordinate_file(x):
     global polygon
