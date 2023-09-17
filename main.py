@@ -14,7 +14,8 @@ from shapely.geometry.point import Point
 from ublox_gps import UbloxGps
 
 # Call functions from the src directory
-from src.interface import HMI, PolygonHole
+#from src.interface import HMI, PolygonHole
+from src.interface import coordinate_file
 from src.tools import fix_divot, tool_offset
 
 # Global constants
@@ -290,10 +291,11 @@ def travel_robot():
 
 
 if __name__ == "__main__":
-    global PolygonHole
+    #global PolygonHole
     # Run the interface
-    PolygonHole = HMI()
-  
+    #PolygonHole = HMI()
+    coordinate_file()
+    
     print(PolygonHole)
     while True:
         #global PolygonHole
