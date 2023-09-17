@@ -47,7 +47,7 @@ device = cfg.get_device()
 json = json.load(open(f"{PROJECT_PATH}/tests/json_stringTesting.json",
             encoding="utf-8",
         )
-    ))
+    )
 json_string= str(json).replace("'", '\"')
 advanced_mode = rs.rs400_advanced_mode(device)
 advanced_mode.load_json(json_string)
