@@ -12,7 +12,10 @@ PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 
 polygon = None
 
-
+def get_polygon():
+    global polygon
+    return polygon
+    
 def HMI():
     """
     One time UI selection on start up where worker selects what hole they are on,
@@ -230,4 +233,6 @@ def coordinate_file(x):
     elif x == 2:
         csv = pd.read_csv(f"{PROJECT_PATH}/data/HCC1-1.csv", header=0)
         print(csv)
+
+
 
