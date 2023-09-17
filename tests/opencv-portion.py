@@ -54,7 +54,7 @@ advanced_mode.load_json(json_string)
 
 try:
     start = time.time()
-    while time.time() - start < 20:
+    while time.time() - start < 5:
 
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
