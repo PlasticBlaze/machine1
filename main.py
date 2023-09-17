@@ -271,7 +271,7 @@ def check(Location):
     """
     global polygon
     # polygon = coordinateFile(x)
-    print(polygon)
+    #print(polygon)
     # point = getPoint()
     print(Location)
     pos_check = polygon.contains(Location)
