@@ -21,7 +21,7 @@ from src.tools import fix_divot, tool_offset
 # Global constants
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #PORT_SERIAL = "/dev/serial0"
-polygon = None
+
 
 def routine():
     """
@@ -293,6 +293,7 @@ def travel_robot():
 
 if __name__ == "__main__":
     global polygon
+    polygon = None
     # Run the interface
     HMI()
     #coordinate_file()
