@@ -300,7 +300,6 @@ if __name__ == "__main__":
     
     print(polygon)
     while True:
-        global PolygonHole
         # Move robot to certain location
         travel_robot()
 
