@@ -161,10 +161,10 @@ try:
 
         cv2.drawMarker(rcanvas, frameCentroid, (255, 255, 255), cv2.MARKER_CROSS, 10, 1)
         #rmask_u8 = cv2.resize(mask_u8, (pX, pY))
-        cv2.imshow("Canvas", rcanvas)
-        #cv2.imshow("Big Mask", rmask_u8)
-        #cv2.imshow("Blur", rblur)
-
+        cv2.imshow("Canvas", rcanvas)'''
+        cv2.imshow("Big Mask", rmask_u8)
+        cv2.imshow("Blur", rblur)
+        '''
         '''''''''''''''''''''''''''''''''''''''''''''''
         'Diameter of wheel is 97mm currently          '
         '1026 pulses is 1 stepper rotation             '
