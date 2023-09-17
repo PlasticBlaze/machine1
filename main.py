@@ -297,6 +297,7 @@ if __name__ == "__main__":
     # Run the interface
     HMI()
     #coordinate_file()
+    root.withdraw()
     time.sleep(5)
     
     print(polygon)
