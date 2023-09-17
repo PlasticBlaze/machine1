@@ -264,7 +264,7 @@ def getpoint():
     return Location
 
 
-def check(Location):
+def check(Location, polygon):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
@@ -293,12 +293,10 @@ if __name__ == "__main__":
     # Run the interface
     global polygon
     HMI()
-    global polygon
     print(polygon)
     while True:
         # Move robot to certain location
         travel_robot()
-        print(polygon)
         # Get current location
         point = getpoint()
         
