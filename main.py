@@ -309,3 +309,12 @@ if __name__ == "__main__":
                 if routine():
                     # End loop when the robot is centered
                     break
+                else:
+                    print("Routine returned False.")
+            else:
+                print("Check returned False.")
+        else:
+            print("PolygonHole is None. Please select a hole in the interface.")
+
+        # Add a delay to avoid overwhelming the system with print statements
+        time.sleep(1)
