@@ -20,6 +20,7 @@ from src.tools import fix_divot, tool_offset
 # Global constants
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 #PORT_SERIAL = "/dev/serial0"
+global polygon
 
 
 def routine():
