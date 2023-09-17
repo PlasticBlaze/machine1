@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
+PROJECT_PATH = "/home/plasticblaze/projects/machine1"
 
 root = Tk()
 root.title("Select Hole")
@@ -29,13 +30,13 @@ def coordinateFile(x):
     global polygon
     if x == 1:
         csvX = pd.read_csv(
-            "C:\\Users\\lysackb\\Documents\\Python Scripts\\HCC1-1.csv",
+            f"{PROJECT_PATH}/data/HCC1-1.csv",
             usecols=[0],
             header=0,
         )
         numpX = csvX.to_numpy()
         csvY = pd.read_csv(
-            "C:\\Users\\lysackb\\Documents\\Python Scripts\\HCC1-1.csv",
+            f"{PROJECT_PATH}/data/HCC1-1.csv",
             usecols=[1],
             header=0,
         )
@@ -45,7 +46,7 @@ def coordinateFile(x):
         Check(polygon)
     elif x == 2:
         csv = pd.read_csv(
-            "C:\\Users\\lysackb\\Documents\\Python Scripts\\testfile.csv", header=0
+            f"{PROJECT_PATH}/data/HCC1-1.csv", header=0
         )
         print(csv)
 
