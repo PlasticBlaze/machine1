@@ -42,7 +42,7 @@ def coordinate_file(x):
         PolygonHole = Polygon(lats_long_array)
         #return Polygon(lats_long_array)
         
-        root.destroy()
+        #root.destroy()
         #return PolygonHole
     
     elif x == 2:
