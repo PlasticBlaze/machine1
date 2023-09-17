@@ -208,7 +208,7 @@ def HMI():
 
     root.mainloop()
 
-def coordinate_file(x):
+def coordinate_file(x, root):
     global polygon
     if x == 1:
         df_x = pd.read_csv(
