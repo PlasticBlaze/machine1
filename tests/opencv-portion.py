@@ -92,7 +92,7 @@ try:
         # Creates physical coordinate conversion factor from pixels to mm. Assuming 3 ft x 4 ft is image area.
         # Convert image to mm scale. = 914.4 mm x 1219.2 mm. Now cm scale
         PtoCM_Scale = 75 / pX
-        print(PtoCM_Scale)
+        #print(PtoCM_Scale)
 
         # Find contours using statistics, creates image to show contours.
         '''contours, _ = cv2.findContours(rmask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
