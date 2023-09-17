@@ -264,7 +264,7 @@ def getpoint():
     Location = Point(-85.5911993, 38.2348362)
     return Location
 
-def check(Location, polygon):
+def check(Location):
 
     """
     Function to check if the robot is still within the boundaries,
@@ -292,7 +292,7 @@ def travel_robot():
 
 
 if __name__ == "__main__":
-    #global polygon
+    global polygon
     # Run the interface
     #PolygonHole = HMI()
     #coordinate_file()
