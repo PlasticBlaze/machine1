@@ -23,7 +23,7 @@ root = Tk()
 root.title("Select Hole")
 
 def coordinate_file(x):
-    global PolygonHole
+    global polygon
     if x == 1:
         df_x = pd.read_csv(
             f"{PROJECT_PATH}/data/HCC1-1.csv",
@@ -39,10 +39,10 @@ def coordinate_file(x):
         y_array = df_y.to_numpy()
         lats_long_array = np.column_stack((x_array, y_array))
         print(lats_long_array)
-        PolygonHole = Polygon(lats_long_array)
+        polygon = Polygon(lats_long_array)
         #return Polygon(lats_long_array)
-        
-        #root.destroy()
+        print(polygon)
+        root.destroy()
         #return PolygonHole
     
     elif x == 2:
