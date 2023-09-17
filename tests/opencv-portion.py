@@ -70,7 +70,7 @@ try:
         colorizer.set_option(rs.option.max_distance, 0.385)
         depth_image = np.asanyarray(colorizer.colorize(depth_frame).get_data())
         #color_image = np.asanyarray(color_frame.get_data())
-        cv2.imwrite('/home/pi/Pictures/frame1.jpg', depth_image)
+        cv2.imwrite('/home/plasticblaze/Pictures/frame1.jpg', depth_image)
 
 
         # Show images
@@ -95,7 +95,7 @@ try:
         print(PtoCM_Scale)
 
         # Find contours using statistics, creates image to show contours.
-        contours, _ = cv2.findContours(rmask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        '''contours, _ = cv2.findContours(rmask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
         canvas = cv2.cvtColor(rmask_u8, cv2.COLOR_GRAY2BGR)
         rcanvas = cv2.resize(canvas, (pX, pY))
 
@@ -158,7 +158,7 @@ try:
             yDistanceCM = ((yDistance * PtoCM_Scale) * -1)
             yDistanceCM = round(yDistanceCM, 2)
             print("y Distance from Center in CM:", yDistanceCM)
-
+'''
         cv2.drawMarker(rcanvas, frameCentroid, (255, 255, 255), cv2.MARKER_CROSS, 10, 1)
         #rmask_u8 = cv2.resize(mask_u8, (pX, pY))
         cv2.imshow("Canvas", rcanvas)
