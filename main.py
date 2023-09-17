@@ -291,10 +291,11 @@ def travel_robot():
 
 
 if __name__ == "__main__":
-    #global PolygonHole
+    global PolygonHole
     # Run the interface
     #PolygonHole = HMI()
     coordinate_file(1)
+    time.sleep(10)
     
     print(PolygonHole)
     while True:
