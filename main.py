@@ -290,15 +290,16 @@ def travel_robot():
 
 if __name__ == "__main__":
     # Run the interface
+    
     HMI()
-
+    print(polygon)
     while True:
         # Move robot to certain location
         travel_robot()
-
+        print(polygon)
         # Get current location
         point = getpoint()
-        global polygon
+        
         # check function returning True if the robot is still within the boundaries
         if check(point):
             # routine function returning True if the imager is centered to the found contour
