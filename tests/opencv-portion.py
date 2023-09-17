@@ -158,7 +158,7 @@ try:
             yDistanceCM = ((yDistance * PtoCM_Scale) * -1)
             yDistanceCM = round(yDistanceCM, 2)
             print("y Distance from Center in CM:", yDistanceCM)
-'''
+
         cv2.drawMarker(rcanvas, frameCentroid, (255, 255, 255), cv2.MARKER_CROSS, 10, 1)
         #rmask_u8 = cv2.resize(mask_u8, (pX, pY))
         cv2.imshow("Canvas", rcanvas)
@@ -214,7 +214,7 @@ try:
             #if AReply == "Done":
                 #break
 
-
+'''
 finally:
     # Stop streaming
     pipeline.stop()
