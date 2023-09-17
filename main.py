@@ -226,7 +226,7 @@ def routine():
         return False
 
 
-def getpoint():
+'''def getpoint():
     port = serial.Serial(PORT_SERIAL, baudrate=38400, timeout=1)
     gps = UbloxGps(port)
 
@@ -256,10 +256,14 @@ def getpoint():
         print("Average Lat: ", avgLatCoord)
         print("Average Lon: ", avgLonCoord)
         point1 = Point("avgLatCoord", "avgLonCoord")
-        return point1
+        return point1'''
+
+def getpoint():
+    Location = Point(-85.5911993, 38.2348362)
+    return Location
 
 
-def check(point1):
+def check(Location):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
@@ -268,8 +272,8 @@ def check(point1):
     # polygon = coordinateFile(x)
     print(polygon)
     # point = getPoint()
-    print(point1)
-    pos_check = polygon.contains(point1)
+    print(Location)
+    pos_check = polygon.contains(Location)
     print(pos_check)
 
     # Return a boolean
