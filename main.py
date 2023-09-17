@@ -10,17 +10,16 @@ import cv2
 import numpy as np
 import pyrealsense2 as rs
 import serial
-from shapely.geometry.point import Point
+from shapely.geometry import Point
 from ublox_gps import UbloxGps
 
 # Call functions from the src directory
-#from src.interface import HMI, PolygonHole
-from src.interface import HMI, polygon
-from src.tools import fix_divot, tool_offset
+from src.interface import HMI
+from src.tools import fix_divot, tool_ofset
 
 # Global constants
 PROJECT_PATH = "/home/plasticblaze/projects/machine1"
-#PORT_SERIAL = "/dev/serial0"
+PORT_SERIAL = "/dev/serial0"
 
 
 def routine():
@@ -51,7 +50,7 @@ def routine():
 
     json_file = json.load(
         open(
-            f"{PROJECT_PATH}/src/config/json_string-testing.json",
+            f"{PROJECT_PATH}/src/config/json_string_testing.json",
             encoding="utf-8",
         )
     )
@@ -227,7 +226,7 @@ def routine():
         return False
 
 
-'''def getpoint():
+def getpoint():
     port = serial.Serial(PORT_SERIAL, baudrate=38400, timeout=1)
     gps = UbloxGps(port)
 
@@ -257,28 +256,21 @@ def routine():
         print("Average Lat: ", avgLatCoord)
         print("Average Lon: ", avgLonCoord)
         point1 = Point("avgLatCoord", "avgLonCoord")
-        point1 = Point(-85.5911993, 38.2348362)
-        return point1'''
+        return point1
 
-def getpoint():
-    Location = Point(-85.5911993, 38.2348362)
-    return Location
 
-def check(Location):
-
+def check(point1):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
     if true, continue routine of fixing
     """
-    global polygon
     # polygon = coordinateFile(x)
-    #print(polygon)
+    print(polygon)
     # point = getPoint()
-    print(Location)
-    pos_check = polygon.contains(Location)
-    print(polygon.contains(Location))
-    print("variable: ", pos_check)
+    print(point1)
+    pos_check = polygon.contains(point1)
+    print(pos_check)
 
     # Return a boolean
     if pos_check:
@@ -292,33 +284,19 @@ def travel_robot():
 
 
 if __name__ == "__main__":
-    global polygon
-    polygon = None
     # Run the interface
     HMI()
-    #coordinate_file()
-    time.sleep(5)
-    
-    print(polygon)
+
     while True:
         # Move robot to certain location
         travel_robot()
 
         # Get current location
-        now = getpoint()
-        if polygon is not None:
-            # check function returning True if the robot is still within the boundaries
-            if check(now, polygon):
-                # routine function returning True if the imager is centered to the found contour
-                if routine():
-                    # End loop when the robot is centered
-                    break
-                else:
-                    print("Routine returned False.")
-            else:
-                print("Check returned False.")
-        else:
-            print("PolygonHole is None. Please select a hole in the interface.")
+        point = getpoint()
 
-        # Add a delay to avoid overwhelming the system with print statements
-        time.sleep(3)
+        # check function returning True if the robot is still within the boundaries
+        if check(point):
+            # routine function returning True if the imager is centered to the found contour
+            if routine():
+                # End loop when the robot is centered
+                break
