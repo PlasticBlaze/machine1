@@ -264,7 +264,7 @@ def getpoint():
     Location = Point(-85.5911993, 38.2348362)
     return Location
 
-def check(Location, PolygonHole):
+def check(Location, polygon):
     """
     Function to check if the robot is still within the boundaries,
     if false, turn around and get back in
@@ -275,8 +275,8 @@ def check(Location, PolygonHole):
     #print(polygon)
     # point = getPoint()
     print(Location)
-    pos_check = PolygonHole.contains(Location)
-    print(PolygonHole.contains(Location))
+    pos_check = polygon.contains(Location)
+    print(polygon.contains(Location))
     print("variable: ", pos_check)
 
     # Return a boolean
@@ -291,13 +291,13 @@ def travel_robot():
 
 
 if __name__ == "__main__":
-    global PolygonHole
+    global polygon
     # Run the interface
     #PolygonHole = HMI()
     coordinate_file(1)
     time.sleep(10)
     
-    print(PolygonHole)
+    print(polygon)
     while True:
         #global PolygonHole
         # Move robot to certain location
@@ -305,9 +305,9 @@ if __name__ == "__main__":
 
         # Get current location
         now = getpoint()
-        if PolygonHole is not None:
+        if polygon is not None:
             # check function returning True if the robot is still within the boundaries
-            if check(now, PolygonHole):
+            if check(now, polygon):
                 # routine function returning True if the imager is centered to the found contour
                 if routine():
                     # End loop when the robot is centered
