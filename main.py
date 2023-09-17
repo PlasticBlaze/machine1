@@ -269,6 +269,7 @@ def check(Location):
     if false, turn around and get back in
     if true, continue routine of fixing
     """
+    global polygon
     # polygon = coordinateFile(x)
     print(polygon)
     # point = getPoint()
