@@ -207,8 +207,10 @@ def HMI():
     button_18.grid(row=2, column=9)
 
     root.mainloop()
+    if x is not None:
+        root.destroy()
 
-def coordinate_file(x, root):
+def coordinate_file(x):
     global polygon
     if x == 1:
         df_x = pd.read_csv(
@@ -229,7 +231,7 @@ def coordinate_file(x, root):
         print(polygon)
         #return Polygon(lats_long_array)
         
-        root.destroy()
+        #root.destroy()
         #return PolygonHole
     
     elif x == 2:
