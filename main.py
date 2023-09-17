@@ -302,7 +302,7 @@ if __name__ == "__main__":
 
         # Get current location
         now = getpoint()
-
+        if PolygonHole is not None
         # check function returning True if the robot is still within the boundaries
         if check(now, PolygonHole):
             # routine function returning True if the imager is centered to the found contour
