@@ -260,7 +260,10 @@ def routine():
         return point1'''
 
 def getpoint():
-    Location = Point(-85.5911993, 38.2348362)
+    #FALSE TEST POINT BELOW
+    #Location = Point(-85.5911993, 38.2348362)
+    #TRUE TEST POINT BELOW
+    Location = Point(-85.591300, 38.234893)
     return Location
 
 
