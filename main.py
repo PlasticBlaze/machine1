@@ -294,7 +294,7 @@ if __name__ == "__main__":
     #global PolygonHole
     # Run the interface
     #PolygonHole = HMI()
-    coordinate_file()
+    coordinate_file(1)
     
     print(PolygonHole)
     while True:
