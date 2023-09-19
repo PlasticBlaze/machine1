@@ -37,7 +37,7 @@ char split = ':';         //this is the character that would be used for seperat
                           //the syntax for commands would be:   command:value1:value2
 
 int listSize = 5;                                     //the amount of commands in the list
-String commands[] = {"hello", "add", "toolOFFSET", "YMOV", "XMOV"};     //the list of every command name
+String commands[] = {"hello", "reverse", "toolOFFSET", "YMOV", "XMOV"};     //the list of every command name
 
 
 void setup() 
@@ -218,7 +218,7 @@ void CommHello()                               //each of these routines are what
   CommConfirm();
 }
 
-void CommAdd(int val1, int val2)
+void CommAdd(int val1, int val2) //need to see how to get the robot to do 180 spin.
 {
   Serial.println(val1 + val2);
   CommConfirm();
