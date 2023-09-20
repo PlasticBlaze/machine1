@@ -220,6 +220,8 @@ def routine():
                 print(AReply)
                 if AReply == "Done":
                     break
+            print(f"Counter: {counter} (Progress: {3 - counter + 1}/3)")
+            counter -= 1
     '''
     '''
     finally:
