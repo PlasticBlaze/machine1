@@ -228,4 +228,4 @@ def routine():
             # Stop streaming
             pipeline.stop()
 
-    routine()
+routine()
