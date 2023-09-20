@@ -222,8 +222,8 @@ def routine():
                         break
                 print(f"Counter: {counter} (Progress: {3 - counter + 1}/3)")
                 counter -= 1
-        '''
-        '''
+        
+        
         finally:
             # Stop streaming
             pipeline.stop()
