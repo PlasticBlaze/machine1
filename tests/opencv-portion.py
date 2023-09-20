@@ -10,6 +10,8 @@ import time
 import math
 import serial
 
+adjThreshold = 10
+
 # Sets threshold for min & max divot size to fix (units: Pixels)
 minDivot = 125
 # Sets resized pixel count for x and y axis
@@ -35,6 +37,10 @@ def decodestr(inputstr):
 
 def routine(): 
     counter = 0
+
+    XpulseCalc = round(28)
+    YpulseCalc = round(33)
+    
     while counter < 3:
         # Configure depth and color streams
         pipeline = rs.pipeline()
@@ -181,8 +187,7 @@ def routine():
                 XpulseCalc = round(XpulseCalc)
                 YpulseCalc = (yDistanceCM / rotationParam) '''
                 #YpulseCalc = round(YpulseCalc)
-                XpulseCalc = round(28)
-                YpulseCalc = round(33)
+                
                 print("Number of pulses in x direction:", XpulseCalc)
                 print("Number of pulses in y direction:", YpulseCalc)
         
@@ -220,9 +225,19 @@ def routine():
                     print(AReply)
                     if AReply == "Done":
                         break
+
+                XpulseCalc -= 7
+                YpulseCalc -= 10
+
+                
                 print(f"Counter: {counter} (Progress: {3 - counter + 1}/3)")
-                counter -= 1
-        
+                counter += 1
+                if counter = 3 and (XpulseEncode > adjThreshold or YpulseEncode > adjThreshold):
+                    print("Could not reach point")
+                    break
+                elif counter = 3 and (XpulseEncode < adjThreshold and YpulseEncode < adjThreshold):
+                    print("I'm Here")
+                    break
         
         finally:
             # Stop streaming
