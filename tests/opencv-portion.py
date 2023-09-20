@@ -230,12 +230,12 @@ def routine():
                 YpulseCalc1 = int(YpulseCalc1) - 10
 
                 
-                print(f"Counter: {counter} (Progress: {3 - counter + 1}/3)")
+                print(f"Counter: {counter} (Progress: {0 + counter + 1}/3)")
                 counter += 1
-                if counter == 3 and (XpulseEncode > adjThreshold or YpulseEncode > adjThreshold):
+                if counter == 3 and (XpulseCalc1 > adjThreshold or YpulseCalc1 > adjThreshold):
                     print("Could not reach point")
                     break
-                elif counter == 3 and (XpulseEncode < adjThreshold and YpulseEncode < adjThreshold):
+                elif counter == 3 and (XpulseCalc1 < adjThreshold and YpulseCalc1 < adjThreshold):
                     print("I'm Here")
                     break
         
