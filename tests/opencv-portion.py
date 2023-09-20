@@ -226,8 +226,8 @@ def routine():
                     if AReply == "Done":
                         break
 
-                XpulseCalc -= int(7)
-                YpulseCalc -= int(10)
+                XpulseCalc = int(XpulseEncode) - 7
+                YpulseCalc = int(YpulseEncode) - 10
 
                 
                 print(f"Counter: {counter} (Progress: {3 - counter + 1}/3)")
