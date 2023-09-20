@@ -235,7 +235,10 @@ def routine():
                 
                 print(f"Counter: {counter} (Progress: {0 + counter}/3)")
                 counter += 1
-                if counter == 3 and (XpulseCalc1 > adjThreshold or YpulseCalc1 > adjThreshold):
+                if counter < 3 and (XpulseCalc1 < adjThreshold and YpulseCalc1 < adjThreshold):
+                    print("Arrived Early")
+                    break
+                elif counter == 3 and (XpulseCalc1 > adjThreshold or YpulseCalc1 > adjThreshold):
                     print("Could not reach point")
                     break
                 elif counter == 3 and (XpulseCalc1 < adjThreshold and YpulseCalc1 < adjThreshold):
