@@ -227,3 +227,5 @@ def routine():
     finally:
         # Stop streaming
         pipeline.stop()
+
+routine()
