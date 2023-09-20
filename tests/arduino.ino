@@ -37,7 +37,7 @@ char split = ':';         //this is the character that would be used for seperat
                           //the syntax for commands would be:   command:value1:value2
 
 int listSize = 5;                                     //the amount of commands in the list
-String commands[] = {"hello", "reverse", "toolOFFSET", "YMOV", "XMOV"};     //the list of every command name
+String commands[] = {"hello", "Reverse", "toolOFFSET", "YMOV", "XMOV"};     //the list of every command name
 
 
 void setup() 
@@ -194,11 +194,11 @@ void CommLookup(String com, String val1, String val2)
     case 0:                                 //essentially a hello world.                       |  Syntax: hello:null:null
       CommHello();                          //this activates the hello world subroutine        |  returns Hello!
       break;
-    case 1:                                 //adds both values together and return the sum.    |  Syntax: add:value1:value2
-      CommAdd(val1.toInt(), val2.toInt());  //this activates the addition subroutine           |  returns value1 + value2
+    case 1:                                     
+      toolOFFSET(val1.toInt(), val2.toInt());  //this activates the tool offset subroutine           |  returns value1 + value2
       break;
-    case 2:                                 //subtracts both values and return the difference  |  Syntax: subtract:value1:value2
-      CommSub(val1.toInt(), val2.toInt());  //this activates the subtraction subroutine        |  returns value1 - value2
+    case 2:                                 
+      Reverse(val1.toInt(), val2.toInt());  //this activates the reverse subroutine       
       break;
     case 3:
       yMovement(val1.toInt(), val2.toInt());
@@ -221,6 +221,12 @@ void CommHello()                               //each of these routines are what
 void CommAdd(int val1, int val2) //need to see how to get the robot to do 180 spin.
 {
   Serial.println(val1 + val2);
+  CommConfirm();
+}
+
+void Reverse(int val1, int val2)
+{
+  Serial.println("Reversing Now!");
   CommConfirm();
 }
 
