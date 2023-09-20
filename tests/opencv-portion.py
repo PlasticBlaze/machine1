@@ -35,7 +35,7 @@ def decodestr(inputstr):
 
 def routine(): 
     counter = 0
-    while counter < 3
+    while counter < 3:
     # Configure depth and color streams
     pipeline = rs.pipeline()
     config = rs.config()
