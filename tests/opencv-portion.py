@@ -38,8 +38,8 @@ def decodestr(inputstr):
 def routine(): 
     counter = 0
 
-    XpulseCalc = int(28)
-    YpulseCalc = int(33)
+    XpulseCalc1 = int(28)
+    YpulseCalc1 = int(33)
     
     while counter < 3:
         # Configure depth and color streams
@@ -194,12 +194,12 @@ def routine():
                 #YpulseCalc = str(YpulseCalc)
                 #YpulseCalc = str("YMOV:" + YpulseCalc + ":0")
                 #YpulseEncode = YpulseCalc.encode()
-                YpulseCalc = str(YpulseCalc)
+                YpulseCalc = str(YpulseCalc1)
                 YpulseCalc = str("YMOV:" + YpulseCalc + ":0")
                 YpulseEncode = YpulseCalc.encode()
                 print(YpulseEncode)
         
-                XpulseCalc = str(XpulseCalc)
+                XpulseCalc = str(XpulseCalc1)
                 XpulseCalc = str("XMOV:" + XpulseCalc + ":0")
                 XpulseEncode = XpulseCalc.encode()
                 print(XpulseEncode)
@@ -226,8 +226,8 @@ def routine():
                     if AReply == "Done":
                         break
 
-                XpulseCalc = int(XpulseCalc) - 7
-                YpulseCalc = int(YpulseCalc) - 10
+                XpulseCalc1 = int(XpulseCalc1) - 7
+                YpulseCalc1 = int(YpulseCalc1) - 10
 
                 
                 print(f"Counter: {counter} (Progress: {3 - counter + 1}/3)")
