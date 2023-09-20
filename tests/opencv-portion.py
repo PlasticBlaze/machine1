@@ -38,8 +38,8 @@ def decodestr(inputstr):
 def routine(): 
     counter = 0
 
-    XpulseCalc = round(28)
-    YpulseCalc = round(33)
+    XpulseCalc = int(28)
+    YpulseCalc = int(33)
     
     while counter < 3:
         # Configure depth and color streams
@@ -226,8 +226,8 @@ def routine():
                     if AReply == "Done":
                         break
 
-                XpulseCalc -= 7
-                YpulseCalc -= 10
+                XpulseCalc -= int(7)
+                YpulseCalc -= int(10)
 
                 
                 print(f"Counter: {counter} (Progress: {3 - counter + 1}/3)")
