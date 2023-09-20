@@ -38,8 +38,11 @@ def decodestr(inputstr):
 def routine(): 
     counter = 0
 
-    XpulseCalc1 = int(28)
-    YpulseCalc1 = int(33)
+    #XpulseCalc1 = int(28)
+    #YpulseCalc1 = int(33)
+
+    XpulseCalc1 = int(42)
+    YpulseCalc1 = int(52)
     
     while counter < 3:
         # Configure depth and color streams
