@@ -188,8 +188,8 @@ def routine():
                 YpulseCalc = (yDistanceCM / rotationParam) '''
                 #YpulseCalc = round(YpulseCalc)
                 
-                print("Number of pulses in x direction:", XpulseCalc)
-                print("Number of pulses in y direction:", YpulseCalc)
+                print("Number of pulses in x direction:", XpulseCalc1)
+                print("Number of pulses in y direction:", YpulseCalc1)
         
                 #YpulseCalc = str(YpulseCalc)
                 #YpulseCalc = str("YMOV:" + YpulseCalc + ":0")
