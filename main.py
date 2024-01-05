@@ -194,37 +194,12 @@ def routine():
                 cv2.imshow(f"Canvas {rcanvas}")
                 # cv2.imshow("Big Mask", rmask_u8)
                 # cv2.imshow("Blur", rblur)
-    
-                # Diameter of wheel is 97mm currently
-                # 1026 pulses is 1 stepper rotation
-    
-                wheel_diameter = 97
-                wheel_circumference = wheel_diameter * pi
-                wheel_circumference = round(wheel_circumference, 5)
-                rotation_param = wheel_circumference / 1000
-                print(rotation_param)
-    
-                x_pulse_calc = x_dist_cm / rotation_param
-                x_pulse_calc = round(x_pulse_calc)
-                y_pulse_calc = y_dist_cm / rotation_param
-                y_pulse_calc = round(y_pulse_calc)
-                print(f"Number of pulses in x direction: {x_pulse_calc}")
-                print(f"Number of pulses in y direction: {y_pulse_calc}")
-    
-                y_pulse_calc = str(y_pulse_calc)
-                y_pulse_calc = str("YMOV:" + y_pulse_calc + ":0")
-                y_pulse_encode = y_pulse_calc.encode()
-                print(y_pulse_encode)
-    
-                x_pulse_calc = str(x_pulse_calc)
-                x_pulse_calc = str("XMOV:" + x_pulse_calc + ":0")
-                x_pulse_encode = x_pulse_calc.encode()
-                print(x_pulse_encode)
-    
+
+                x_pulse_calc, y_pulse_calc = scalingmath(x_dist_cm, y_dist_cm)
+                
                 '''
                 Movement Status
                 '''
-                
                 print(f"Counter: {POSTryCnt} (Progress: {0 + POSTryCnt}/3)")
                 POSTryCnt += 1
                 
@@ -234,32 +209,66 @@ def routine():
                 elif POSTryCnt < 3 and (int(x_pulse_calc) > adjThreshold or int(y_pulse_calc) > adjThreshold):
                     print("Could not reach point")
                     centered = False
-                
-                '''''''''''''''''''''''''''''''''''''''''''''''''''
-                ' Beginning Data Transmission                     '
-                '''''''''''''''''''''''''''''''''''''''''''''''''''
-        
-                serial1 = serial.Serial('/dev/ttyACM0', 115200)
-                time.sleep(2)
-                serial1.flush()
-        
-                serial1.write(YpulseEncode)
-                while True:
-                    AReply = decodestr(serial1.readline())
-                    print(AReply)
-                    if AReply == "Done":
-                        break
-        
-                serial1.write(XpulseEncode)
-                while True:
-                    AReply = decodestr(serial1.readline())
-                    print(AReply)
-                    if AReply == "Done":
-                        break
+                    motorCOMs(x_pulse_encode, y_pulse_encode)
+
         finally:
             # Stop streaming
             pipeline.stop()
     
+                    
+def scalingmath(x_dist_cm, y_dist_cm):
+    
+    # Diameter of wheel is 97mm currently
+    # 1026 pulses is 1 stepper rotation
+    wheel_diameter = 97
+    wheel_circumference = wheel_diameter * pi
+    wheel_circumference = round(wheel_circumference, 5)
+    rotation_param = wheel_circumference / 1000
+    print(rotation_param)
+
+    x_pulse_calc = x_dist_cm / rotation_param
+    x_pulse_calc = round(x_pulse_calc)
+    y_pulse_calc = y_dist_cm / rotation_param
+    y_pulse_calc = round(y_pulse_calc)
+    print(f"Number of pulses in x direction: {x_pulse_calc}")
+    print(f"Number of pulses in y direction: {y_pulse_calc}")
+
+    y_pulse_calc = str(y_pulse_calc)
+    y_pulse_calc = str("YMOV:" + y_pulse_calc + ":0")
+    print(y_pulse_calc)
+    
+    x_pulse_calc = str(x_pulse_calc)
+    x_pulse_calc = str("XMOV:" + x_pulse_calc + ":0")
+    print(x_pulse_calc)
+    
+    return x_pulse_calc, y_pulse_calc
+    
+def motorCOMs(x_pulse_calc, y_pulse_calc):
+    
+    '''''''''''''''''''''''''''''''''''''''''''''''''''
+    '            Beginning Data Transmission          '
+    '''''''''''''''''''''''''''''''''''''''''''''''''''
+    serial1 = serial.Serial('/dev/ttyACM0', 115200)
+    time.sleep(2)
+    serial1.flush()
+
+    y_pulse_encode = y_pulse_calc.encode()
+    x_pulse_encode = x_pulse_calc.encode()
+
+    serial1.write(y_pulse_encode)
+    while True:
+        AReply = decodestr(serial1.readline())
+        print(AReply)
+        if AReply == "Done":
+            break
+    
+    serial1.write(x_pulse_encode)
+    while True:
+        AReply = decodestr(serial1.readline())
+        print(AReply)
+        if AReply == "Done":
+            break
+
 
 '''def getpoint():
     port = serial.Serial(PORT_SERIAL, baudrate=38400, timeout=1)
@@ -344,10 +353,13 @@ if __name__ == "__main__":
             if routine():
                 # End loop when the robot is centered
                 break
+                # maybe not end loop when robot is centered but fix then set fixing function to true.
             else:
                 print("Routine returned False.")
         else:
             print("Check returned False.")
+            # I think this is where to add the turn around function
+            # might be able to combine this else and the one above this as well, both scenarios should turn bot around.
     else:
         print("PolygonHole is None. Please select a hole in the interface.")
 
