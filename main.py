@@ -354,6 +354,7 @@ if __name__ == "__main__":
         time.sleep(5)
         # check function returning True if the robot is still within the boundaries
         if check(point):
+            print("location true loop")
             # routine function returning True if the imager is centered to the found contour
             if routine():
                 # End loop when the robot is centered
