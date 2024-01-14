@@ -120,7 +120,7 @@ def routine():
                 # Divot area parameter filters out divots too small or too large.
     
                 c = max(contours, key=cv2.contourArea, default = 0)
-                if default = 0:
+                if default == 0:
                     break
                 x, y, w, h = cv2.boundingRect(c)
                 rectArea = w * h
