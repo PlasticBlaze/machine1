@@ -357,7 +357,7 @@ if __name__ == "__main__":
             # routine function returning True if the imager is centered to the found contour
             if routine():
                 # End loop when the robot is centered
-                break
+                print("nothing to fix")
                 # maybe not end loop when robot is centered but fix then set fixing function to true.
             else:
                 print("Routine returned False.")
