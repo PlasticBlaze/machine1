@@ -106,7 +106,7 @@ def routine():
                 print(PtoCM_Scale)
     
                 # Find contours using statistics, creates image to show contours.
-                contours, _ = cv2.findContours(
+                _, contours = cv2.findContours(
                     rmask_u8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
                 )
                 canvas = cv2.cvtColor(rmask_u8, cv2.COLOR_GRAY2BGR)
