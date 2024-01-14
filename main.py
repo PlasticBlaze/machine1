@@ -119,7 +119,9 @@ def routine():
                 # For any contours found in the mask, draw bounding rectangle and find center of contour.
                 # Divot area parameter filters out divots too small or too large.
     
-                c = max(contours, key=cv2.contourArea)
+                c = max(contours, key=cv2.contourArea, default = 0)
+                if default = 0:
+                    break
                 x, y, w, h = cv2.boundingRect(c)
                 rectArea = w * h
                 divotArea = np.int0(rectArea)
