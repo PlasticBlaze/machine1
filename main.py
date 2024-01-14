@@ -29,6 +29,7 @@ def routine():
     POSCounter = 3
     POSTryCnt = 0
     adjThreshold = 10
+    default = 1
     
     """
     Takes image and finds contour to fix - currently this immediately sends step counts to arduino.
