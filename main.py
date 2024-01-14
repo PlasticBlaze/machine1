@@ -215,6 +215,7 @@ def routine():
                         motorCOMs(x_pulse_encode, y_pulse_encode)
                 else:
                     print("no contours")
+                    break
         finally:
             # Stop streaming
             pipeline.stop()
