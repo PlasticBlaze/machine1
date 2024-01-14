@@ -119,104 +119,105 @@ def routine():
     
                 # For any contours found in the mask, draw bounding rectangle and find center of contour.
                 # Divot area parameter filters out divots too small or too large.
+                if contours:
+                    c = max(contours, key=cv2.contourArea, default = 0)
+                    if default == 0:
+                        break
+                    x, y, w, h = cv2.boundingRect(c)
+                    rectArea = w * h
+                    divotArea = np.int0(rectArea)
+                    # print("divotarea: ", divotArea)
+                    if np.any(divotArea > min_divot):
+                        # Calculates centroid of each divot found that satisfies divot size parameters.
+                        M = cv2.moments(c)
+                        while M["m00"] == 0:
+                            continue
+                        cX = int(M["m10"] / M["m00"])
+                        cY = int(M["m01"] / M["m00"])
+        
+                        # Prints results for each divot on canvas as well as result box later on.
+                        print("cX: ", cX)
+                        print("cY: ", cY)
+        
+                    # Draws contours, bounding boxes, and a circle to notate the center of mass for the contour.
+                    cv2.drawContours(rcanvas, c, -1, (0, 255, 0), 1)
+                    cv2.rectangle(rcanvas, (x, y), (x + w, y + h), (0, 255, 0), 1)
+                    cv2.circle(rcanvas, (cX, cY), 2, (0, 0, 255), -1)
+                    # Shows contour centroids in pixel coordinates above contour.
+                    text_x = f"x: {str(cX)}"
+                    text_y = f"y: {str(cY)}"
+                    cv2.putText(
+                        rcanvas,
+                        text_x,
+                        (cX - -20, cY - 25),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (0, 255, 255),
+                        1,
+                    )
+                    cv2.putText(
+                        rcanvas,
+                        text_y,
+                        (cX - -20, cY - 15),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.3,
+                        (0, 255, 255),
+                        1,
+                    )
+        
+                    # Calculating the distance from center of contour to center of frame for both x and y directions.
+                    # These calculations will control the movement to the divot for amendment.
+        
+                    if np.any(cX > frameCentroidX):
+                        x_dist = cX - frameCentroidX
+                        x_dist_cm = x_dist * PtoCM_Scale
+                        x_dist_cm = round(x_dist_cm, 2)
+                        print(f"x Distance from Center in CM: {x_dist_cm}")
+                    else:
+                        x_dist = cX - frameCentroidX
+                        x_dist_cm = x_dist * PtoCM_Scale
+                        x_dist_cm = round(x_dist_cm, 2)
+                        print(f"x Distance from Center in CM: {x_dist_cm}")
+        
+                    if np.any(cY > frameCentroidY):
+                        y_dist = cY - frameCentroidY
+                        y_dist_cm = (y_dist * PtoCM_Scale) * -1
+                        y_dist_cm = round(y_dist_cm, 2)
+                        print(f"y Distance from Center in CM: {y_dist_cm}")
+                    else:
+                        y_dist = cY - frameCentroidY
+                        y_dist_cm = (y_dist * PtoCM_Scale) * -1
+                        y_dist_cm = round(y_dist_cm, 2)
+                        print(f"y Distance from Center in CM: {y_dist_cm}")
+        
+                    cv2.drawMarker(
+                        rcanvas, frameCentroid, (255, 255, 255), cv2.MARKER_CROSS, 10, 1
+                    )
+                    # rmask_u8 = cv2.resize(mask_u8, (pX, pY))
+                    cv2.imshow(f"Canvas {rcanvas}")
+                    # cv2.imshow("Big Mask", rmask_u8)
+                    # cv2.imshow("Blur", rblur)
     
-                c = max(contours, key=cv2.contourArea, default = 0)
-                if default == 0:
-                    break
-                x, y, w, h = cv2.boundingRect(c)
-                rectArea = w * h
-                divotArea = np.int0(rectArea)
-                # print("divotarea: ", divotArea)
-                if np.any(divotArea > min_divot):
-                    # Calculates centroid of each divot found that satisfies divot size parameters.
-                    M = cv2.moments(c)
-                    while M["m00"] == 0:
-                        continue
-                    cX = int(M["m10"] / M["m00"])
-                    cY = int(M["m01"] / M["m00"])
-    
-                    # Prints results for each divot on canvas as well as result box later on.
-                    print("cX: ", cX)
-                    print("cY: ", cY)
-    
-                # Draws contours, bounding boxes, and a circle to notate the center of mass for the contour.
-                cv2.drawContours(rcanvas, c, -1, (0, 255, 0), 1)
-                cv2.rectangle(rcanvas, (x, y), (x + w, y + h), (0, 255, 0), 1)
-                cv2.circle(rcanvas, (cX, cY), 2, (0, 0, 255), -1)
-                # Shows contour centroids in pixel coordinates above contour.
-                text_x = f"x: {str(cX)}"
-                text_y = f"y: {str(cY)}"
-                cv2.putText(
-                    rcanvas,
-                    text_x,
-                    (cX - -20, cY - 25),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (0, 255, 255),
-                    1,
-                )
-                cv2.putText(
-                    rcanvas,
-                    text_y,
-                    (cX - -20, cY - 15),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.3,
-                    (0, 255, 255),
-                    1,
-                )
-    
-                # Calculating the distance from center of contour to center of frame for both x and y directions.
-                # These calculations will control the movement to the divot for amendment.
-    
-                if np.any(cX > frameCentroidX):
-                    x_dist = cX - frameCentroidX
-                    x_dist_cm = x_dist * PtoCM_Scale
-                    x_dist_cm = round(x_dist_cm, 2)
-                    print(f"x Distance from Center in CM: {x_dist_cm}")
+                    x_pulse_calc, y_pulse_calc = scalingmath(x_dist_cm, y_dist_cm)
+                    
+                    '''
+                    Movement Status
+                    '''
+                    print(f"Counter: {POSTryCnt} (Progress: {0 + POSTryCnt}/3)")
+                    POSTryCnt += 1
+                    
+                    if POSTryCnt <= 3 and (int(x_pulse_calc) < adjThreshold and int(y_pulse_calc) < adjThreshold):
+                        print("Arrived Early")
+                        centered = True
+                    elif POSTryCnt < 3 and (int(x_pulse_calc) > adjThreshold or int(y_pulse_calc) > adjThreshold):
+                        print("Could not reach point")
+                        centered = False
+                        motorCOMs(x_pulse_encode, y_pulse_encode)
                 else:
-                    x_dist = cX - frameCentroidX
-                    x_dist_cm = x_dist * PtoCM_Scale
-                    x_dist_cm = round(x_dist_cm, 2)
-                    print(f"x Distance from Center in CM: {x_dist_cm}")
-    
-                if np.any(cY > frameCentroidY):
-                    y_dist = cY - frameCentroidY
-                    y_dist_cm = (y_dist * PtoCM_Scale) * -1
-                    y_dist_cm = round(y_dist_cm, 2)
-                    print(f"y Distance from Center in CM: {y_dist_cm}")
-                else:
-                    y_dist = cY - frameCentroidY
-                    y_dist_cm = (y_dist * PtoCM_Scale) * -1
-                    y_dist_cm = round(y_dist_cm, 2)
-                    print(f"y Distance from Center in CM: {y_dist_cm}")
-    
-                cv2.drawMarker(
-                    rcanvas, frameCentroid, (255, 255, 255), cv2.MARKER_CROSS, 10, 1
-                )
-                # rmask_u8 = cv2.resize(mask_u8, (pX, pY))
-                cv2.imshow(f"Canvas {rcanvas}")
-                # cv2.imshow("Big Mask", rmask_u8)
-                # cv2.imshow("Blur", rblur)
-
-                x_pulse_calc, y_pulse_calc = scalingmath(x_dist_cm, y_dist_cm)
-                
-                '''
-                Movement Status
-                '''
-                print(f"Counter: {POSTryCnt} (Progress: {0 + POSTryCnt}/3)")
-                POSTryCnt += 1
-                
-                if POSTryCnt <= 3 and (int(x_pulse_calc) < adjThreshold and int(y_pulse_calc) < adjThreshold):
-                    print("Arrived Early")
-                    centered = True
-                elif POSTryCnt < 3 and (int(x_pulse_calc) > adjThreshold or int(y_pulse_calc) > adjThreshold):
-                    print("Could not reach point")
-                    centered = False
-                    motorCOMs(x_pulse_encode, y_pulse_encode)
-
-        finally:
-            # Stop streaming
-            pipeline.stop()
+                    print("no contours")
+            finally:
+                # Stop streaming
+                pipeline.stop()
     
                     
 def scalingmath(x_dist_cm, y_dist_cm):
